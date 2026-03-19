@@ -1,167 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta property="og:title" content="SDR Operating System Full Audit — Wilberforce Moyo">
-<meta property="og:description" content="Score all four pillars in one audit. Find out exactly which pillar is causing variance before it hits the forecast.">
-<meta property="og:image" content="https://wilberforcemoyo.github.io/sdr-tools/og_preview.png">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://wilberforcemoyo.github.io/sdr-tools/audit.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDR OS Full Audit — Wilberforce Moyo</title>
+<meta property="og:title" content="SDR Operating System Full Audit — Wilberforce Moyo">
+<meta property="og:description" content="Score all four pillars. See the financial cost of variance. Get a printable report for your leadership team.">
+<meta property="og:image" content="https://wilberforcemoyo.github.io/sdr-tools/og_preview.png">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy:#0E1E35; --navy2:#1B2A4A; --green:#10B981; --dgreen:#059669; --lgreen:#D1FAE5; --tgreen:#ECFDF5;
-    --red:#EF4444; --dred:#DC2626; --lred:#FEE2E2; --tred:#FFF5F5;
-    --amber:#F59E0B; --lamber:#FEF3C7; --tamber:#FFFBEB;
-    --blue:#3B82F6; --lblue:#DBEAFE; --tblue:#EFF6FF;
-    --purple:#8B5CF6; --lpurple:#EDE9FE; --tpurple:#F5F3FF;
-    --gold:#C9A84C; --slate:#64748B; --light:#F1F5F9; --border:#E2E8F0;
-    --white:#FFFFFF; --text:#0F172A; --muted:#64748B; --card:#FFFFFF; --bg:#F8FAFC;
-    --p1:#3B82F6; --p2:#10B981; --p3:#8B5CF6; --p4:#F59E0B;
-  }
-  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0E1E35;--navy2:#1B2A4A;--green:#10B981;--dgreen:#059669;--lgreen:#D1FAE5;--tgreen:#ECFDF5;
+  --red:#EF4444;--dred:#DC2626;--lred:#FEE2E2;--tred:#FFF5F5;
+  --amber:#F59E0B;--lamber:#FEF3C7;--tamber:#FFFBEB;
+  --blue:#3B82F6;--lblue:#DBEAFE;--tblue:#EFF6FF;
+  --purple:#8B5CF6;--gold:#C9A84C;--light:#F1F5F9;--border:#E2E8F0;
+  --white:#FFFFFF;--text:#0F172A;--muted:#64748B;--card:#FFFFFF;--bg:#F8FAFC;
+  --p1:#3B82F6;--p2:#10B981;--p3:#8B5CF6;--p4:#F59E0B;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-  .nav { background:#060F1C; padding:10px 16px; text-align:center; font-size:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:6px 14px; }
-  .nav span { color:#475569; font-weight:600; letter-spacing:0.06em; }
-  .nav a { color:#94A3B8; text-decoration:none; }
-  .nav a:hover, .nav a.active { color:var(--gold); }
+/* NAV */
+.nav{background:#060F1C;padding:10px 16px;text-align:center;font-size:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px}
+.nav span{color:#475569;font-weight:600;letter-spacing:0.06em}
+.nav a{color:#94A3B8;text-decoration:none}.nav a:hover,.nav a.active{color:var(--gold)}
 
-  .header { background:var(--navy); padding:52px 24px 44px; text-align:center; position:relative; overflow:hidden; }
-  .header::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p4)); }
-  .header-tag { display:inline-block; font-size:11px; font-weight:600; letter-spacing:0.1em; color:var(--gold); background:rgba(201,168,76,0.12); padding:6px 14px; border-radius:20px; margin-bottom:20px; }
-  .header h1 { font-family:'DM Serif Display',serif; font-size:clamp(28px,5vw,44px); color:#fff; line-height:1.15; margin-bottom:12px; }
-  .header h1 span { color:var(--gold); }
-  .header-sub { font-size:16px; color:#94A3B8; max-width:480px; margin:0 auto 24px; line-height:1.6; }
-  .header-pills { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
-  .header-pill { font-size:11px; font-weight:500; padding:4px 12px; border-radius:10px; color:#fff; }
+/* HEADER */
+.header{background:var(--navy);padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p4))}
+.header-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);background:rgba(201,168,76,0.12);padding:6px 14px;border-radius:20px;margin-bottom:20px}
+.header h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,5vw,44px);color:#fff;line-height:1.15;margin-bottom:12px}
+.header h1 span{color:var(--gold)}
+.header-sub{font-size:16px;color:#94A3B8;max-width:480px;margin:0 auto 24px;line-height:1.6}
+.header-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.header-pill{font-size:11px;font-weight:500;padding:4px 12px;border-radius:10px;color:#fff}
 
-  .main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+/* PROGRESS STEPS */
+.progress-bar{max-width:760px;margin:0 auto;padding:20px 16px 0;display:flex;align-items:center;gap:0}
+.step{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted)}
+.step.active{color:var(--navy)}
+.step.done{color:var(--green)}
+.step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--border);color:var(--muted);transition:all 0.3s;flex-shrink:0}
+.step.active .step-num{background:var(--navy);color:#fff}
+.step.done .step-num{background:var(--green);color:#fff}
+.step-line{flex:1;height:2px;background:var(--border);margin:0 4px;transition:background 0.3s}
+.step-line.done{background:var(--green)}
+.step-label{display:none}
+@media(min-width:500px){.step-label{display:inline}}
 
-  .co-bar { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:28px; display:flex; align-items:center; gap:12px; }
-  .co-bar label { font-size:13px; color:var(--muted); white-space:nowrap; }
-  .co-bar input { flex:1; border:none; outline:none; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:600; color:var(--navy); background:transparent; min-width:0; }
-  .co-bar input::placeholder { color:var(--border); font-weight:400; }
+/* MAIN */
+.main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+.co-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.co-bar label{font-size:13px;color:var(--muted);white-space:nowrap}
+.co-bar input{flex:1;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--navy);background:transparent;min-width:0}
+.co-bar input::placeholder{color:var(--border);font-weight:400}
 
-  .sec-label { font-size:11px; font-weight:600; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
-  .sec-label::after { content:''; flex:1; height:1px; background:var(--border); }
-  .rating-hint { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.6; }
+/* COST CALCULATOR */
+.calc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:28px;opacity:0.4;pointer-events:none;transition:opacity 0.4s}
+.calc-card.unlocked{opacity:1;pointer-events:all}
+.calc-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.calc-subtitle{font-size:12px;color:var(--muted);margin-bottom:14px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:500px){.calc-grid{grid-template-columns:1fr}}
+.calc-field label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:6px}
+.calc-field input{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--navy);outline:none;background:var(--bg);transition:border-color 0.2s}
+.calc-field input:focus{border-color:var(--navy)}
 
-  /* PILLAR CARDS */
-  .pillar-card { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:14px; transition:border-color 0.3s; }
-  .pillar-card.strong { border-left:4px solid var(--green); }
-  .pillar-card.moderate { border-left:4px solid var(--amber); }
-  .pillar-card.weak { border-left:4px solid var(--red); }
+.sec-label{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.rating-hint{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
 
-  .pillar-head { padding:16px 20px; display:flex; align-items:center; gap:14px; cursor:pointer; transition:background 0.2s; }
-  .pillar-head:hover { background:var(--bg); }
-  .pillar-num { font-family:'DM Serif Display',serif; font-size:32px; color:var(--border); transition:color 0.3s; width:36px; flex-shrink:0; line-height:1; }
-  .pillar-card.strong .pillar-num { color:var(--green); }
-  .pillar-card.moderate .pillar-num { color:var(--amber); }
-  .pillar-card.weak .pillar-num { color:var(--red); }
-  .pillar-info { flex:1; }
-  .pillar-name { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:2px; }
-  .pillar-q { font-size:12px; color:var(--muted); }
-  .pillar-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
-  .pillar-score { font-family:'DM Serif Display',serif; font-size:20px; color:var(--border); transition:color 0.3s; }
-  .pillar-card.strong .pillar-score { color:var(--green); }
-  .pillar-card.moderate .pillar-score { color:var(--amber); }
-  .pillar-card.weak .pillar-score { color:var(--red); }
-  .pillar-chev { font-size:11px; color:var(--muted); transition:transform 0.3s; }
-  .pillar-chev.open { transform:rotate(180deg); }
+/* FREE BADGE */
+.free-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--tgreen);color:var(--dgreen);letter-spacing:0.04em}
+.locked-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--tamber);color:#92400E;letter-spacing:0.04em}
 
-  .pillar-body { padding:0 20px 18px; display:none; }
-  .pillar-body.open { display:block; }
+/* PILLAR CARDS */
+.pillar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;transition:border-color 0.3s}
+.pillar-card.strong{border-left:4px solid var(--green)}.pillar-card.moderate{border-left:4px solid var(--amber)}.pillar-card.weak{border-left:4px solid var(--red)}
+.pillar-card.locked-card{border:1px dashed var(--border);background:var(--bg);cursor:pointer}
+.pillar-card.locked-card:hover{border-color:var(--amber)}
+.pillar-head{padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background 0.2s}
+.pillar-head:hover{background:var(--bg)}
+.pillar-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--border);transition:color 0.3s;width:36px;flex-shrink:0;line-height:1}
+.pillar-card.strong .pillar-num{color:var(--green)}.pillar-card.moderate .pillar-num{color:var(--amber)}.pillar-card.weak .pillar-num{color:var(--red)}
+.pillar-card.locked-card .pillar-num{color:var(--border)}
+.pillar-info{flex:1}.pillar-name{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:2px}.pillar-q{font-size:12px;color:var(--muted)}
+.pillar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.pillar-score{font-family:'DM Serif Display',serif;font-size:20px;color:var(--border);transition:color 0.3s}
+.pillar-card.strong .pillar-score{color:var(--green)}.pillar-card.moderate .pillar-score{color:var(--amber)}.pillar-card.weak .pillar-score{color:var(--red)}
+.pillar-chev{font-size:11px;color:var(--muted);transition:transform 0.3s}.pillar-chev.open{transform:rotate(180deg)}
+.pillar-body{padding:0 20px 18px;display:none}.pillar-body.open{display:block}
+.q-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}.q-row:last-of-type{border-bottom:none}
+.q-btns{display:flex;gap:4px;flex-shrink:0;margin-top:1px}
+.qb{width:28px;height:26px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);transition:all 0.15s}
+.qb:hover{border-color:var(--navy);color:var(--navy)}
+.qb.r0{background:var(--tred);border-color:var(--red);color:var(--dred)}.qb.r1{background:var(--tamber);border-color:var(--amber);color:#92400E}.qb.r2{background:var(--tgreen);border-color:var(--green);color:var(--dgreen)}
+.q-info{flex:1}.q-text{font-size:13px;color:var(--text);line-height:1.4;margin-bottom:3px}.q-hint{font-size:11px;color:var(--muted);line-height:1.4}
+.q-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--light);color:var(--muted);flex-shrink:0;white-space:nowrap}
+.pillar-bar-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.pillar-bar-row label{font-size:11px;color:var(--muted);width:90px;flex-shrink:0}
+.pbr-track{flex:1;height:5px;background:var(--light);border-radius:3px;overflow:hidden}
+.pbr-fill{height:5px;border-radius:3px;transition:width 0.4s,background 0.3s}
+.pbr-val{font-size:12px;font-weight:600;width:36px;text-align:right}
+.action-plan{background:var(--bg);border-radius:10px;padding:14px 16px;margin-top:14px;border:1px solid var(--border);display:none}
+.action-plan.show{display:block}
+.ap-label{font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:10px}
+.ap-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);line-height:1.5}
+.ap-item:last-child{border-bottom:none;padding-bottom:0}
+.ap-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
 
-  .q-row { display:flex; align-items:flex-start; gap:12px; padding:11px 0; border-bottom:1px solid var(--border); }
-  .q-row:last-of-type { border-bottom:none; }
-  .q-btns { display:flex; gap:4px; flex-shrink:0; margin-top:1px; }
-  .qb { width:28px; height:26px; border-radius:6px; border:1px solid var(--border); background:transparent; cursor:pointer; font-size:11px; font-weight:600; color:var(--muted); transition:all 0.15s; }
-  .qb:hover { border-color:var(--navy); color:var(--navy); }
-  .qb.r0 { background:var(--tred); border-color:var(--red); color:var(--dred); }
-  .qb.r1 { background:var(--tamber); border-color:var(--amber); color:#92400E; }
-  .qb.r2 { background:var(--tgreen); border-color:var(--green); color:var(--dgreen); }
-  .q-info { flex:1; }
-  .q-text { font-size:13px; color:var(--text); line-height:1.4; margin-bottom:3px; }
-  .q-hint { font-size:11px; color:var(--muted); line-height:1.4; }
-  .q-badge { font-size:10px; font-weight:600; padding:2px 7px; border-radius:5px; background:var(--light); color:var(--muted); flex-shrink:0; white-space:nowrap; }
+/* LOCKED PILLAR TEASER */
+.locked-teaser{padding:28px 20px;text-align:center}
+.locked-icon{font-size:32px;margin-bottom:12px}
+.locked-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:8px}
+.locked-desc{font-size:14px;color:var(--muted);line-height:1.6;max-width:420px;margin:0 auto 16px}
+.locked-preview{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.locked-preview-item{font-size:11px;font-weight:500;padding:4px 10px;border-radius:8px;background:var(--light);color:var(--muted)}
+.unlock-btn{display:inline-block;background:var(--gold);color:var(--navy);font-size:14px;font-weight:600;padding:12px 28px;border-radius:10px;border:none;cursor:pointer;transition:opacity 0.2s;font-family:'DM Sans',sans-serif}
+.unlock-btn:hover{opacity:0.9}
 
-  .pillar-bar-row { display:flex; align-items:center; gap:10px; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
-  .pillar-bar-row label { font-size:11px; color:var(--muted); width:90px; flex-shrink:0; }
-  .pbr-track { flex:1; height:5px; background:var(--light); border-radius:3px; overflow:hidden; }
-  .pbr-fill { height:5px; border-radius:3px; transition:width 0.4s, background 0.3s; }
-  .pbr-val { font-size:12px; font-weight:600; width:36px; text-align:right; }
+/* GATE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,22,40,0.75);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--card);border-radius:20px;padding:32px 28px;max-width:440px;width:100%;position:relative}
+.modal-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);margin-bottom:12px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px}
+.modal-perks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;padding:14px 16px;background:var(--bg);border-radius:10px;border:1px solid var(--border)}
+.modal-perk{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text)}
+.perk-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.modal-form{display:flex;flex-direction:column;gap:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:400px){.form-row{grid-template-columns:1fr}}
+.form-field label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:5px}
+.form-field input{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color 0.2s;background:#fff}
+.form-field input:focus{border-color:var(--navy)}
+.form-field input.error{border-color:var(--red)}
+.submit-btn{background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:13px;border-radius:10px;border:none;cursor:pointer;transition:background 0.2s;margin-top:4px}
+.submit-btn:hover{background:var(--navy2)}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:6px}
+.modal-close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:50%;background:var(--light);border:none;cursor:pointer;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--border)}
+.form-error{font-size:12px;color:var(--red);margin-top:4px;display:none}
+.form-success{text-align:center;display:none}
+.success-icon{font-size:48px;margin-bottom:12px}
+.success-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px}
+.success-desc{font-size:14px;color:var(--muted);line-height:1.6}
 
-  /* MASTER SCORE */
-  .master-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; margin-bottom:20px; transition:border-color 0.3s; position:relative; overflow:hidden; }
-  .master-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p4)); }
-  .master-card.excellent { border-color:var(--green); }
-  .master-card.good { border-color:#10B981; }
-  .master-card.at-risk { border-color:var(--amber); }
-  .master-card.critical { border-color:var(--red); }
-  .master-top { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
-  .master-co { font-size:11px; font-weight:600; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:5px; }
-  .master-headline { font-family:'DM Serif Display',serif; font-size:22px; color:var(--navy); line-height:1.2; }
-  .master-big { text-align:right; flex-shrink:0; }
-  .master-num { font-family:'DM Serif Display',serif; font-size:56px; line-height:1; transition:color 0.3s; }
-  .master-denom { font-size:13px; color:var(--muted); }
-  .pillar-bars { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
-  @media(max-width:480px){.pillar-bars{grid-template-columns:1fr}}
-  .pb-item { background:var(--bg); border-radius:10px; padding:10px 12px; }
-  .pb-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-  .pb-name { font-size:11px; color:var(--muted); }
-  .pb-val { font-size:13px; font-weight:600; }
-  .pb-bar { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
-  .pb-fill { height:5px; border-radius:3px; transition:width 0.4s, background 0.3s; }
-  .weak-box { border-radius:12px; padding:14px 16px; margin-bottom:14px; border:1px solid var(--border); display:none; }
-  .weak-box.show { display:block; }
-  .weak-label { font-size:11px; font-weight:600; color:var(--muted); letter-spacing:0.06em; margin-bottom:5px; }
-  .weak-name { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:4px; }
-  .weak-fix { font-size:13px; color:var(--muted); line-height:1.5; }
-  .master-desc { font-size:14px; color:var(--muted); line-height:1.7; padding-top:14px; border-top:1px solid var(--border); }
-  .master-desc strong { color:var(--text); }
+/* MASTER SCORE */
+.master-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;transition:border-color 0.3s;position:relative;overflow:hidden}
+.master-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p4))}
+.master-card.excellent{border-color:var(--green)}.master-card.good{border-color:#10B981}.master-card.at-risk{border-color:var(--amber)}.master-card.critical{border-color:var(--red)}
+.master-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.master-co{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
+.master-headline{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);line-height:1.2}
+.master-big{text-align:right;flex-shrink:0}
+.master-num{font-family:'DM Serif Display',serif;font-size:56px;line-height:1;transition:color 0.3s}
+.master-denom{font-size:13px;color:var(--muted)}
+.pillar-bars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+@media(max-width:480px){.pillar-bars{grid-template-columns:1fr}}
+.pb-item{background:var(--bg);border-radius:10px;padding:10px 12px}
+.pb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.pb-name{font-size:11px;color:var(--muted)}.pb-val{font-size:13px;font-weight:600}
+.pb-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pb-fill{height:5px;border-radius:3px;transition:width 0.4s,background 0.3s}
+.weak-box{border-radius:12px;padding:14px 16px;margin-bottom:14px;border:1px solid var(--border);display:none}
+.weak-box.show{display:block}
+.weak-label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.06em;margin-bottom:5px}
+.weak-name{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.weak-fix{font-size:13px;color:var(--muted);line-height:1.5}
+.master-desc{font-size:14px;color:var(--muted);line-height:1.7;padding-top:14px;border-top:1px solid var(--border)}
+.master-desc strong{color:var(--text)}
 
-  /* BIG CTA */
-  .cta-card { background:var(--navy); border-radius:16px; overflow:hidden; margin-bottom:20px; }
-  .cta-top { padding:32px 24px; text-align:center; }
-  .cta-stats { display:inline-flex; align-items:center; gap:16px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 20px; margin-bottom:20px; flex-wrap:wrap; justify-content:center; }
-  .cta-stat { text-align:center; }
-  .cta-stat-num { font-family:'DM Serif Display',serif; font-size:28px; line-height:1; }
-  .cta-stat-label { font-size:10px; color:#64748B; margin-top:2px; font-weight:600; letter-spacing:0.06em; }
-  .cta-div { width:1px; height:36px; background:rgba(255,255,255,0.1); }
-  .cta-tag { font-size:11px; font-weight:600; letter-spacing:0.1em; color:var(--gold); margin-bottom:12px; }
-  .cta-title { font-family:'DM Serif Display',serif; font-size:clamp(20px,3vw,28px); color:#fff; margin-bottom:10px; line-height:1.2; }
-  .cta-desc { font-size:14px; color:#94A3B8; line-height:1.6; max-width:440px; margin:0 auto 24px; }
-  .cta-btn { display:inline-block; background:var(--gold); color:var(--navy); font-size:15px; font-weight:600; padding:14px 28px; border-radius:10px; text-decoration:none; transition:opacity 0.2s; }
-  .cta-btn:hover { opacity:0.9; }
-  .cta-bottom { background:#060F1C; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  .cta-proof { font-size:12px; color:#475569; line-height:1.6; }
-  .cta-proof strong { color:#94A3B8; }
-  .cta-li { font-size:12px; color:#475569; text-decoration:none; }
-  .cta-li:hover { color:var(--gold); }
+/* COST CARD */
+.cost-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;display:none}
+.cost-card.show{display:block}
+.cost-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:16px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:500px){.cost-grid{grid-template-columns:1fr}}
+.cost-metric{background:var(--bg);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--border)}
+.cost-metric-label{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.cost-metric-num{font-family:'DM Serif Display',serif;font-size:28px;color:var(--red);line-height:1;margin-bottom:4px}
+.cost-metric-sub{font-size:11px;color:var(--muted);line-height:1.4}
+.cost-desc{font-size:13px;color:var(--muted);line-height:1.6;padding-top:14px;border-top:1px solid var(--border)}
+.cost-desc strong{color:var(--text)}
 
-  /* TOOL LINKS */
-  .tool-links { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; margin-bottom:20px; }
-  .tl-title { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:14px; }
-  .tl-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  @media(max-width:420px){.tl-grid{grid-template-columns:1fr}}
-  .tl-item { background:var(--bg); border-radius:10px; padding:12px 14px; text-decoration:none; display:flex; align-items:center; gap:10px; transition:background 0.2s; border:1px solid var(--border); }
-  .tl-item:hover { background:var(--border); }
-  .tl-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-  .tl-name { font-size:13px; font-weight:500; color:var(--navy); }
-  .tl-sub { font-size:11px; color:var(--muted); }
+/* DOWNLOAD BOX */
+.download-box{background:var(--tgreen);border:1px solid var(--lgreen);border-radius:16px;padding:20px 24px;margin-bottom:20px;display:none}
+.download-box.show{display:block}
+.dl-title{font-size:14px;font-weight:600;color:var(--dgreen);margin-bottom:14px}
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:440px){.dl-grid{grid-template-columns:1fr}}
+.dl-btn{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--lgreen);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.dl-btn:hover{background:var(--lgreen)}
+.dl-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.dl-info{flex:1}
+.dl-name{font-size:13px;font-weight:600;color:var(--navy)}
+.dl-sub{font-size:11px;color:var(--muted)}
 
-  .reset-btn { display:block; width:100%; text-align:center; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:10px; padding:11px; cursor:pointer; transition:all 0.2s; margin-bottom:40px; }
-  .reset-btn:hover { background:var(--light); color:var(--text); }
+/* CTA */
+.cta-card{background:var(--navy);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.cta-top{padding:32px 24px;text-align:center}
+.cta-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);margin-bottom:12px}
+.cta-title{font-family:'DM Serif Display',serif;font-size:clamp(20px,3vw,28px);color:#fff;margin-bottom:10px;line-height:1.2}
+.cta-desc{font-size:14px;color:#94A3B8;line-height:1.6;max-width:440px;margin:0 auto 24px}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-size:15px;font-weight:600;padding:14px 28px;border-radius:10px;text-decoration:none;transition:opacity 0.2s}
+.cta-btn:hover{opacity:0.9}
+.cta-bottom{background:#060F1C;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cta-proof{font-size:12px;color:#475569;line-height:1.6}.cta-proof strong{color:#94A3B8}
+.cta-li{font-size:12px;color:#475569;text-decoration:none}.cta-li:hover{color:var(--gold)}
 
-  .footer { background:var(--navy); text-align:center; padding:28px 24px; }
-  .footer-catchphrase { font-family:'DM Serif Display',serif; font-size:18px; color:var(--gold); margin-bottom:6px; }
-  .footer-name { font-size:13px; color:#475569; margin-bottom:16px; }
-  .footer-name strong { color:#94A3B8; }
-  .footer-li { display:inline-block; font-size:13px; color:#475569; text-decoration:none; padding:8px 16px; border:1px solid #1E3A5F; border-radius:8px; transition:all 0.2s; }
-  .footer-li:hover { border-color:var(--gold); color:var(--gold); }
+/* ACTIONS */
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:12px;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--muted)}
+.btn:hover{background:var(--light);color:var(--text)}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:#fff}.btn-primary:hover{background:var(--navy2)}
+.btn-report{grid-column:span 2;background:var(--tgreen);border-color:var(--lgreen);color:var(--dgreen);font-weight:600;display:none}
+.btn-report.show{display:block}.btn-report:hover{background:var(--lgreen)}
+
+/* TOOL LINKS */
+.tool-links{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px}
+.tl-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:14px}
+.tl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:420px){.tl-grid{grid-template-columns:1fr}}
+.tl-item{background:var(--bg);border-radius:10px;padding:12px 14px;text-decoration:none;display:flex;align-items:center;gap:10px;transition:background 0.2s;border:1px solid var(--border)}
+.tl-item:hover{background:var(--border)}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tl-name{font-size:13px;font-weight:500;color:var(--navy)}.tl-sub{font-size:11px;color:var(--muted)}
+.reset-btn{display:block;width:100%;text-align:center;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:10px;padding:11px;cursor:pointer;transition:all 0.2s;margin-bottom:40px}
+.reset-btn:hover{background:var(--light);color:var(--text)}
+.footer{background:var(--navy);text-align:center;padding:28px 24px}
+.footer-catchphrase{font-family:'DM Serif Display',serif;font-size:18px;color:var(--gold);margin-bottom:6px}
+.footer-name{font-size:13px;color:#475569;margin-bottom:16px}.footer-name strong{color:#94A3B8}
+.footer-li{display:inline-block;font-size:13px;color:#475569;text-decoration:none;padding:8px 16px;border:1px solid #1E3A5F;border-radius:8px;transition:all 0.2s}
+.footer-li:hover{border-color:var(--gold);color:var(--gold)}
+@media print{.nav,.header,.progress-bar,.calc-card,.actions,.cta-card,.tool-links,.reset-btn,.footer,.modal-overlay,.download-box{display:none!important}.main{padding:0;max-width:100%}body{background:#fff}.pillar-body{display:block!important}.print-header{display:block!important}}
+.print-header{display:none;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #0E1E35}
 </style>
 </head>
 <body>
@@ -178,7 +255,7 @@
 <div class="header">
   <div class="header-tag">THE SDR OPERATING SYSTEM · FULL AUDIT</div>
   <h1>How healthy is your<br><span>outbound operation?</span></h1>
-  <p class="header-sub">Score all four pillars in one audit. Find out exactly which pillar is causing variance — before it hits the forecast.</p>
+  <p class="header-sub">Score all four pillars. See the financial cost of variance. Get a detailed report for your leadership team.</p>
   <div class="header-pills">
     <span class="header-pill" style="background:rgba(59,130,246,0.25)">01 Input Control</span>
     <span class="header-pill" style="background:rgba(16,185,129,0.25)">02 Execution Standard</span>
@@ -187,17 +264,45 @@
   </div>
 </div>
 
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="step done" id="step-1"><div class="step-num">1</div><span class="step-label">&nbsp;Input Control</span></div>
+  <div class="step-line" id="line-1"></div>
+  <div class="step done" id="step-2"><div class="step-num">2</div><span class="step-label">&nbsp;Execution</span></div>
+  <div class="step-line" id="line-2"></div>
+  <div class="step active" id="step-3"><div class="step-num">3</div><span class="step-label">&nbsp;Rhythm</span></div>
+  <div class="step-line" id="line-3"></div>
+  <div class="step" id="step-4"><div class="step-num">🔒</div><span class="step-label">&nbsp;Signals</span></div>
+  <div class="step-line" id="line-4"></div>
+  <div class="step" id="step-5"><div class="step-num">5</div><span class="step-label">&nbsp;Results</span></div>
+</div>
+
 <div class="main">
+
+  <div class="print-header">
+    <div style="font-size:24px;font-weight:700;color:#0E1E35;margin-bottom:4px">SDR Operating System — Full Audit Report</div>
+    <div style="font-size:13px;color:#64748B" id="print-meta"></div>
+  </div>
 
   <div class="co-bar">
     <label>Company / Team:</label>
     <input type="text" id="co" placeholder="e.g. Acme Corp SDR Team" oninput="updateMaster()">
   </div>
 
+  <!-- COST CALCULATOR — unlocks after gate -->
+  <div class="calc-card" id="calc-card">
+    <div class="calc-title">Financial Impact Calculator <span class="locked-badge" id="calc-lock-badge">🔒 Unlocks with Pillar 4</span></div>
+    <div class="calc-subtitle">Enter your numbers to see the exact cost of variance in your operation</div>
+    <div class="calc-grid">
+      <div class="calc-field"><label>SDR Team Size</label><input type="number" id="team-size" placeholder="e.g. 8" min="1" oninput="updateCost()"></div>
+      <div class="calc-field"><label>Avg Deal Value ($)</label><input type="number" id="deal-value" placeholder="e.g. 25000" min="0" oninput="updateCost()"></div>
+      <div class="calc-field"><label>Meetings / Rep / Month</label><input type="number" id="meetings" placeholder="e.g. 12" min="0" oninput="updateCost()"></div>
+    </div>
+  </div>
+
   <div class="sec-label">Audit the four pillars</div>
   <div class="rating-hint">Rate each statement: <strong style="color:var(--text)">0 = Not in place</strong> · <strong style="color:var(--text)">1 = Partially in place</strong> · <strong style="color:var(--text)">2 = Fully in place</strong></div>
 
-  <!-- PILLAR CARDS -->
   <div id="pillars"></div>
 
   <!-- MASTER SCORE -->
@@ -208,36 +313,55 @@
       <div class="master-big"><div class="master-num" id="master-num" style="color:var(--border)">—</div><div class="master-denom">/ 100</div></div>
     </div>
     <div class="pillar-bars" id="pillar-bars"></div>
-    <div class="weak-box" id="weak-box">
-      <div class="weak-label">WEAKEST PILLAR — FIX THIS FIRST</div>
-      <div class="weak-name" id="weak-name"></div>
-      <div class="weak-fix" id="weak-fix"></div>
-    </div>
-    <div class="master-desc" id="master-desc">Rate each pillar above to generate your full audit score.</div>
+    <div class="weak-box" id="weak-box"><div class="weak-label">WEAKEST PILLAR — FIX THIS FIRST</div><div class="weak-name" id="wpb-name"></div><div class="weak-fix" id="wpb-fix"></div></div>
+    <div class="master-desc" id="master-desc">Complete all four pillars to generate your full audit score.</div>
   </div>
 
-  <!-- CTA -->
+  <!-- COST RESULTS -->
+  <div class="cost-card" id="cost-card">
+    <div class="cost-title">The Financial Cost of Variance</div>
+    <div class="cost-grid">
+      <div class="cost-metric"><div class="cost-metric-label">Monthly Revenue at Risk</div><div class="cost-metric-num" id="cost-monthly">—</div><div class="cost-metric-sub">Estimated monthly pipeline lost to variance</div></div>
+      <div class="cost-metric"><div class="cost-metric-label">Annual Pipeline Gap</div><div class="cost-metric-num" id="cost-annual">—</div><div class="cost-metric-sub">Projected annual impact if variance continues</div></div>
+      <div class="cost-metric"><div class="cost-metric-label">Cost Per Missed Meeting</div><div class="cost-metric-num" id="cost-meeting">—</div><div class="cost-metric-sub">Value of each meeting lost to poor input quality</div></div>
+    </div>
+    <div class="cost-desc" id="cost-desc"></div>
+  </div>
+
+  <!-- DOWNLOAD BOX -->
+  <div class="download-box" id="download-box">
+    <div class="dl-title">Your resources are ready — unlocked by completing the full audit</div>
+    <div class="dl-grid">
+      <a href="#" onclick="printReport();return false;" class="dl-btn">
+        <div class="dl-icon" style="background:var(--tblue)">📄</div>
+        <div class="dl-info"><div class="dl-name">Audit Report PDF</div><div class="dl-sub">Print your full results for leadership</div></div>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/hubspot-guide.pdf" target="_blank" class="dl-btn">
+        <div class="dl-icon" style="background:#FFF0E8">⚙️</div>
+        <div class="dl-info"><div class="dl-name">HubSpot Integration Guide</div><div class="dl-sub">Install the 4 signals inside HubSpot</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" onclick="resetAll()">Reset audit</button>
+    <button class="btn btn-primary" onclick="window.open('https://wilberforcemoyo.github.io/sdr-tools/','_blank')">Signal dashboard</button>
+    <button class="btn btn-report show" id="report-btn" onclick="printReport()" style="display:none">Generate detailed report for leadership →</button>
+  </div>
+
   <div class="cta-card">
     <div class="cta-top">
-      <div class="cta-tag">THE SDR OPERATIONS AUDIT · $4,500 – $12,000</div>
-      <div class="cta-stats" id="cta-stats">
-        <div class="cta-stat"><div class="cta-stat-num" id="cta-overall" style="color:var(--border)">—</div><div class="cta-stat-label">OVERALL SCORE</div></div>
-        <div class="cta-div"></div>
-        <div class="cta-stat"><div class="cta-stat-num" id="cta-rated" style="color:#64748B">0/4</div><div class="cta-stat-label">PILLARS RATED</div></div>
-        <div class="cta-div"></div>
-        <div class="cta-stat"><div class="cta-stat-num" id="cta-weakest" style="color:var(--border)">—</div><div class="cta-stat-label">WEAKEST PILLAR</div></div>
-      </div>
+      <div class="cta-tag">SDR OPERATIONS AUDIT · $4,500 – $12,000</div>
       <div class="cta-title">Your score identifies the problem.<br>The audit fixes it.</div>
-      <div class="cta-desc">The SDR Operations Audit goes one level deeper. It diagnoses the exact failure points, the root causes, and the installation sequence to fix them.</div>
+      <div class="cta-desc">The SDR Operations Audit goes one level deeper. It diagnoses the exact failure points, the root causes, and the installation sequence to fix them permanently.</div>
       <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="cta-btn">Book your audit with Wilberforce →</a>
     </div>
     <div class="cta-bottom">
-      <div class="cta-proof"><strong>18 years SDR operations.</strong> US, UK and South African B2B SaaS markets.<br>Built and proven across SDR teams at every stage.</div>
+      <div class="cta-proof"><strong>18 years SDR operations.</strong> B2B SaaS · SalesTech · PropTech · US · UK · South Africa</div>
       <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="cta-li">Connect on LinkedIn →</a>
     </div>
   </div>
 
-  <!-- TOOL LINKS -->
   <div class="tool-links">
     <div class="tl-title">Go deeper — individual pillar tools</div>
     <div class="tl-grid">
@@ -257,70 +381,235 @@
   <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="footer-li">Follow on LinkedIn</a>
 </div>
 
+<!-- GATE MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="form-view" id="form-view">
+      <div class="modal-tag">UNLOCK PILLAR 4 — FREE</div>
+      <div class="modal-title">Signal Management<br>+ Financial Cost Calculator</div>
+      <div class="modal-desc">You are one pillar away from your full audit score. Enter your details to unlock Pillar 4, the cost calculator, and your downloadable resources.</div>
+      <div class="modal-perks">
+        <div class="modal-perk"><div class="perk-dot" style="background:var(--p4)"></div>Pillar 4 — Signal Management (5 criteria)</div>
+        <div class="modal-perk"><div class="perk-dot" style="background:var(--red)"></div>Financial cost calculator — monthly, annual, per meeting</div>
+        <div class="modal-perk"><div class="perk-dot" style="background:var(--p2)"></div>Printable PDF report for your leadership team</div>
+        <div class="modal-perk"><div class="perk-dot" style="background:#FF7A59"></div>HubSpot integration guide — install the 4 signals inside HubSpot</div>
+      </div>
+      <form class="modal-form" id="gate-form" onsubmit="submitGate(event)">
+        <div class="form-row">
+          <div class="form-field"><label>First name</label><input type="text" id="f-name" placeholder="Wilberforce" required></div>
+          <div class="form-field"><label>Company</label><input type="text" id="f-company" placeholder="Acme Corp" required></div>
+        </div>
+        <div class="form-field"><label>Work email</label><input type="email" id="f-email" placeholder="you@company.com" required></div>
+        <div class="form-field"><label>SDR team size</label><input type="number" id="f-teamsize" placeholder="e.g. 8" min="1" required></div>
+        <div class="form-error" id="form-error">Something went wrong. Please try again.</div>
+        <button type="submit" class="submit-btn" id="submit-btn">Unlock Pillar 4 and all resources →</button>
+        <div class="form-note">No spam. Your details are used only to send you SDR Operating System resources.</div>
+      </form>
+    </div>
+    <div class="form-success" id="success-view">
+      <div class="success-icon">✅</div>
+      <div class="success-title">You are in.</div>
+      <div class="success-desc">Pillar 4 is now unlocked. Complete the audit to see your full score, financial cost, and downloadable report.</div>
+    </div>
+  </div>
+</div>
+
 <script>
 const PILLARS=[
-  {name:'Input Control',col:'var(--p1)',fix:'Accounts entering sequences have not been checked against both filters. Install Problem Likelihood and Role Accessibility as mandatory gates before any account enters a sequence.',
+  {name:'Input Control',col:'var(--p1)',
+   fix:'Accounts entering sequences have not been checked against both filters. Install Problem Likelihood and Role Accessibility as mandatory gates before any account enters a sequence.',
+   actions:{
+     weak:['Stop all sequences. Audit accounts currently in the workflow before restarting.','Write Filter 1 (Problem Likelihood) and Filter 2 (Role Accessibility) criteria — specific and verifiable.','Build a filter gate in your CRM — accounts cannot be enrolled without both filters cleared.','Set Account Re-Entry Rate threshold at 15% and review every Monday AM.'],
+     moderate:['Identify which filter is being applied inconsistently — run a spot audit on 20 current accounts.','Introduce manager sign-off on any account flagged as borderline before sequencing.','Set Account Re-Entry Rate as a Monday AM standing check this week.','Document the filter criteria and share with all reps — unwritten filters create variance.'],
+     strong:['Maintain the filter standard. Document if not already in writing.','Track Account Re-Entry Rate weekly to confirm filters are holding above threshold.','Review filter criteria quarterly as market conditions change.']
+   },
    qs:[
     {t:'Every account is checked against Filter 1 (Problem Likelihood) before sequencing.',h:'Evidence the problem is active now — not just ICP fit.',w:'Critical'},
     {t:'Every account is checked against Filter 2 (Role Accessibility) before sequencing.',h:'The right person is genuinely reachable — verified contact, no DNC flag.',w:'Critical'},
     {t:'Reps cannot add accounts to sequences without both filters cleared.',h:'No manual override. No exceptions. Enforced at the system level.',w:'Critical'},
     {t:'Account Re-Entry Rate is tracked — removed accounts cannot re-enter without manager review.',h:'Recycled accounts are the most common way bad inputs bypass the filter.',w:'Standard'},
     {t:'Filter criteria are written down and applied consistently by every rep.',h:'Unwritten filters create subjective qualification and variance.',w:'Standard'},
-  ]},
-  {name:'Execution Standard',col:'var(--p2)',fix:'Reps are running different versions of the sequence. Install a written standard: same steps, same qualification criteria at booking, zero ad-hoc decisions. Score each rep against the standard weekly.',
+   ]},
+  {name:'Execution Standard',col:'var(--p2)',
+   fix:'Reps are running different versions of the sequence. Install a written standard: same steps, same qualification criteria at booking, zero ad-hoc decisions. Score each rep against the standard weekly.',
+   actions:{
+     weak:['Write the sequence standard — exact steps, timing, and content guidelines for each step.','Define qualification criteria at meeting booking — both input filters must be verified.','Identify the step with the highest abandonment rate and audit why reps drop there.','Run the Execution Scorecard for every rep this week to establish a baseline.'],
+     moderate:['Find the one step where reps most frequently deviate — redesign that step for executability.','Introduce weekly scorecard reviews for 4 weeks post-correction.','Communicate clearly: deviations are a standard problem, not a rep performance problem.','Track Sequence Abandonment Rate every Tuesday AM — alert threshold is 20%.'],
+     strong:['Maintain weekly spot-checks — three sequences per rep per week.','Track Sequence Abandonment Rate Tuesday AM — alert above 20%.','Use scorecard data quarterly to identify if any specific step needs redesigning.']
+   },
    qs:[
     {t:'All reps follow the same sequence structure — same steps, same order, same cadence.',h:'No rep is running a personalised version of the sequence.',w:'Critical'},
     {t:'Sequence abandonment rate is tracked — the manager knows which step reps drop at.',h:'If you cannot identify where abandonment happens, you cannot fix the standard.',w:'Critical'},
     {t:'The same qualification criteria are applied at every meeting booking.',h:'A meeting booked without qualification is a pipeline quality problem.',w:'Critical'},
     {t:'CRM data is logged same-day — contact attempts, outcomes, status updates.',h:'Next-day logging creates data gaps that break signal accuracy.',w:'Standard'},
     {t:'When the standard is not followed, the fix starts with the standard — not the rep.',h:'If multiple reps deviate at the same step, the step is the problem.',w:'Standard'},
-  ]},
-  {name:'Operating Rhythm',col:'var(--p3)',fix:'The weekly review exists to update, not to diagnose. Replace it with a structured diagnostic cadence: Monday pipeline composition, Tuesday abandonment check, Thursday signal review, Friday quality signal.',
+   ]},
+  {name:'Operating Rhythm',col:'var(--p3)',
+   fix:'The weekly review exists to update, not to diagnose. Replace it with a structured diagnostic cadence: Monday pipeline composition, Tuesday abandonment check, Thursday signal review, Friday quality signal.',
+   actions:{
+     weak:['Replace Monday pipeline review agenda with five diagnostic questions — not status updates.','Install the five-day cadence using the Rhythm Planner tool this week.','Define what a good week looks like: problems caught early, not at the forecast.','Document findings at the end of each week for 4 consecutive weeks.'],
+     moderate:['Identify which days in the cadence are being skipped — address the reason.','Rewrite the Monday agenda to ask diagnostic questions, not status update questions.','Set a minimum rhythm score target of 75% for the next four weeks.','Introduce the one-line weekly diagnostic note every Friday.'],
+     strong:['Maintain the cadence — do not let it drift back to reporting.','Use weekly notes to identify trends across months.','Check rhythm score monthly — below 65% is a warning sign.']
+   },
    qs:[
     {t:'There is a structured weekly diagnostic cadence — not just a pipeline review meeting.',h:'The cadence asks diagnostic questions, not reporting questions.',w:'Critical'},
     {t:'Pipeline composition is reviewed at the start of the week — before sequences run.',h:'Catching quality problems Monday prevents them compounding by Friday.',w:'Critical'},
-    {t:'The weekly review identifies the root cause of variance — not just the symptom.',h:'The question is "which pillar failed this week?" — not "why is pipeline low?"',w:'Standard'},
+    {t:'The weekly review identifies the root cause of variance — not just the symptom.',h:'The question is which pillar failed this week — not why is pipeline low.',w:'Standard'},
     {t:'The manager acts on diagnostic findings within the same week.',h:'A diagnostic that does not trigger action this week is a reporting exercise.',w:'Standard'},
     {t:'The team ends the week with a documented note on what was found and fixed.',h:'Without documentation, the same problem re-appears the following week.',w:'Standard'},
-  ]},
-  {name:'Signal Management',col:'var(--p4)',fix:'The team is measuring lagging indicators. Install four leading signals reviewed weekly: Account Re-Entry Rate, Sequence Abandonment Rate, Pipeline Composition Score, Meeting-to-Opportunity Rate.',
+   ]},
+  {name:'Signal Management',col:'var(--p4)',locked:true,
+   fix:'The team is measuring lagging indicators. Install four leading signals reviewed weekly: Account Re-Entry Rate, Sequence Abandonment Rate, Pipeline Composition Score, Meeting-to-Opportunity Rate.',
+   actions:{
+     weak:['Open the Signal Dashboard and enter current numbers for all four signals today.','Set calendar blocks: Monday AM (Signals 01 and 03), Tuesday AM (Signal 02), Friday AM (Signal 04).','Agree all four thresholds with your team this week.','Establish the trace-back rule: Signal 04 always traces back to Input Control.'],
+     moderate:['Confirm which signals are being tracked and which are missing — fill the gaps this week.','For each missing signal, identify where the data lives and who pulls it.','Establish what action each fired signal triggers — not just the alert.','Review the last four weeks of available signal data as a team.'],
+     strong:['All four signals running — maintain the Monday/Tuesday/Friday cadence.','Refine thresholds as you accumulate 12+ weeks of data.','Build week-on-week trend visibility to spot slow-moving deterioration before it crosses threshold.']
+   },
    qs:[
     {t:'Account Re-Entry Rate is reviewed every Monday — alert threshold is 15%.',h:'Re-entry above 15% means Input Control filters are not holding.',w:'Critical'},
     {t:'Sequence Abandonment Rate is reviewed every Tuesday — alert threshold is 20%.',h:'Abandonment above 20% means the Execution Standard is breaking down.',w:'Critical'},
     {t:'Pipeline Composition Score is reviewed every Monday — alert threshold is below 70%.',h:'Composition below 70% means quality is decaying before it shows in the pipeline.',w:'Critical'},
     {t:'Meeting-to-Opportunity Rate is reviewed every Friday — alert threshold is below 40%.',h:'Conversion below 40% over 4 weeks traces back to Input Control failure.',w:'Standard'},
     {t:'When a signal fires, the response traces to the root cause — not the surface symptom.',h:'A fired signal is the start of a diagnosis, not a performance conversation.',w:'Standard'},
-  ]},
+   ]},
 ];
 
 const state=PILLARS.map(p=>p.qs.map(()=>null));
+let gateUnlocked=false;
 
 function scCol(s){if(s===null)return'var(--border)';if(s>=80)return'var(--green)';if(s>=60)return'#10B981';if(s>=40)return'var(--amber)';return'var(--red)';}
 function scCls(s){if(s===null)return'';if(s>=80)return'strong';if(s>=60)return'moderate';return'weak';}
+function scBand(s){if(s===null)return null;if(s>=80)return'strong';if(s>=60)return'moderate';return'weak';}
+function fmt(n){return n>=1000000?'$'+(n/1000000).toFixed(1)+'M':n>=1000?'$'+(n/1000).toFixed(0)+'K':'$'+Math.round(n);}
 
 function init(){
-  document.getElementById('pillars').innerHTML=PILLARS.map((p,pi)=>`
-    <div class="pillar-card" id="pc-${pi}">
-      <div class="pillar-head" onclick="togglePillar(${pi})">
-        <div class="pillar-num" id="pn-${pi}">0${pi+1}</div>
-        <div class="pillar-info"><div class="pillar-name">${p.name}</div><div class="pillar-q">${pi===0?'What enters the workflow — and does it meet both filters?':pi===1?'Does every rep run the same standard — every time?':pi===2?'Is there a weekly diagnostic cadence — not just a meeting?':'Does the system catch problems before they hit the forecast?'}</div></div>
-        <div class="pillar-right"><span class="pillar-score" id="ps-${pi}">—</span><span class="pillar-chev ${pi===0?'open':''}" id="pc-chev-${pi}">▼</span></div>
+  document.getElementById('pillars').innerHTML=PILLARS.map((p,pi)=>{
+    if(p.locked&&!gateUnlocked) return `
+      <div class="pillar-card locked-card" id="pc-${pi}" onclick="openModal()">
+        <div class="pillar-head" style="cursor:pointer">
+          <div class="pillar-num">04</div>
+          <div class="pillar-info"><div class="pillar-name">${p.name} <span class="locked-badge">🔒 Free unlock required</span></div><div class="pillar-q">Does the system catch problems before they hit the forecast?</div></div>
+        </div>
+        <div class="locked-teaser">
+          <div class="locked-icon">🔒</div>
+          <div class="locked-title">Unlock Pillar 4 to complete your audit</div>
+          <div class="locked-desc">Signal Management is the early warning layer of the system. Complete this pillar to get your full score, financial cost calculator, and downloadable report.</div>
+          <div class="locked-preview">
+            <span class="locked-preview-item">Account Re-Entry Rate</span>
+            <span class="locked-preview-item">Sequence Abandonment Rate</span>
+            <span class="locked-preview-item">Pipeline Composition Score</span>
+            <span class="locked-preview-item">Meeting-to-Opportunity Rate</span>
+            <span class="locked-preview-item">+ Financial cost calculator</span>
+          </div>
+          <button class="unlock-btn" onclick="event.stopPropagation();openModal()">Unlock free — enter your details →</button>
+        </div>
+      </div>`;
+    return `
+      <div class="pillar-card" id="pc-${pi}">
+        <div class="pillar-head" onclick="togglePillar(${pi})">
+          <div class="pillar-num" id="pn-${pi}">0${pi+1}</div>
+          <div class="pillar-info">
+            <div class="pillar-name">${p.name} <span class="free-badge">Free</span></div>
+            <div class="pillar-q">${['What enters the workflow — does it meet both filters?','Does every rep run the same standard — every time?','Is there a weekly diagnostic cadence — not just a meeting?','Does the system catch problems before they hit the forecast?'][pi]}</div>
+          </div>
+          <div class="pillar-right"><span class="pillar-score" id="ps-${pi}">—</span><span class="pillar-chev ${pi===0?'open':''}" id="pc-chev-${pi}">▼</span></div>
+        </div>
+        <div class="pillar-body ${pi===0?'open':''}" id="pb-${pi}">
+          ${p.qs.map((q,qi)=>`
+          <div class="q-row">
+            <div class="q-btns"><button class="qb" id="qb-${pi}-${qi}-0" onclick="rate(${pi},${qi},0)">0</button><button class="qb" id="qb-${pi}-${qi}-1" onclick="rate(${pi},${qi},1)">1</button><button class="qb" id="qb-${pi}-${qi}-2" onclick="rate(${pi},${qi},2)">2</button></div>
+            <div class="q-info"><div class="q-text">${q.t}</div><div class="q-hint">${q.h}</div></div>
+            <span class="q-badge">${q.w}</span>
+          </div>`).join('')}
+          <div class="pillar-bar-row"><label>Pillar score</label><div class="pbr-track"><div class="pbr-fill" id="pbf-${pi}" style="width:0%;background:var(--border)"></div></div><span class="pbr-val" id="pbv-${pi}" style="color:var(--muted)">—</span></div>
+          <div class="action-plan" id="ap-${pi}"><div class="ap-label">PRIORITY ACTIONS FOR THIS PILLAR</div><div id="ap-items-${pi}"></div></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openModal(){
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('form-view').style.display='block';
+  document.getElementById('success-view').style.display='none';
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+
+async function submitGate(e){
+  e.preventDefault();
+  const name=document.getElementById('f-name').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const company=document.getElementById('f-company').value.trim();
+  const teamsize=document.getElementById('f-teamsize').value.trim();
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.textContent='Sending...';
+  document.getElementById('form-error').style.display='none';
+
+  // Pre-fill team size in calculator
+  if(teamsize) document.getElementById('team-size').value=teamsize;
+
+  try {
+    const res=await fetch('https://formspree.io/f/xlgpaqwk',{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,company,'team_size':teamsize,
+        'audit_scores': PILLARS.slice(0,3).map((_,pi)=>PILLARS[pi].name+': '+(getPillarScore(pi)!==null?getPillarScore(pi)+'%':'not rated')).join(' | '),
+        '_subject':'New SDR Audit Lead — '+company})
+    });
+    if(res.ok){
+      document.getElementById('form-view').style.display='none';
+      document.getElementById('success-view').style.display='block';
+      setTimeout(()=>{ closeModal(); unlockPillar4(); },1800);
+    } else {
+      throw new Error('failed');
+    }
+  } catch(err){
+    document.getElementById('form-error').style.display='block';
+    btn.disabled=false; btn.textContent='Unlock Pillar 4 and all resources →';
+  }
+}
+
+function unlockPillar4(){
+  gateUnlocked=true;
+  PILLARS[3].locked=false;
+  document.getElementById('calc-card').classList.add('unlocked');
+  document.getElementById('calc-lock-badge').style.display='none';
+  // Update step 4
+  const s4=document.getElementById('step-4');
+  s4.className='step active';
+  s4.querySelector('.step-num').textContent='4';
+  document.getElementById('line-3').classList.add('done');
+  // Re-render pillar 4
+  const p=PILLARS[3], pi=3;
+  const el=document.getElementById('pc-3');
+  el.outerHTML=`
+    <div class="pillar-card" id="pc-3">
+      <div class="pillar-head" onclick="togglePillar(3)">
+        <div class="pillar-num" id="pn-3">04</div>
+        <div class="pillar-info">
+          <div class="pillar-name">${p.name} <span class="free-badge">Unlocked</span></div>
+          <div class="pillar-q">Does the system catch problems before they hit the forecast?</div>
+        </div>
+        <div class="pillar-right"><span class="pillar-score" id="ps-3">—</span><span class="pillar-chev open" id="pc-chev-3">▼</span></div>
       </div>
-      <div class="pillar-body ${pi===0?'open':''}" id="pb-${pi}">
+      <div class="pillar-body open" id="pb-3">
         ${p.qs.map((q,qi)=>`
         <div class="q-row">
-          <div class="q-btns"><button class="qb" id="qb-${pi}-${qi}-0" onclick="rate(${pi},${qi},0)">0</button><button class="qb" id="qb-${pi}-${qi}-1" onclick="rate(${pi},${qi},1)">1</button><button class="qb" id="qb-${pi}-${qi}-2" onclick="rate(${pi},${qi},2)">2</button></div>
+          <div class="q-btns"><button class="qb" id="qb-3-${qi}-0" onclick="rate(3,${qi},0)">0</button><button class="qb" id="qb-3-${qi}-1" onclick="rate(3,${qi},1)">1</button><button class="qb" id="qb-3-${qi}-2" onclick="rate(3,${qi},2)">2</button></div>
           <div class="q-info"><div class="q-text">${q.t}</div><div class="q-hint">${q.h}</div></div>
           <span class="q-badge">${q.w}</span>
         </div>`).join('')}
-        <div class="pillar-bar-row"><label>Pillar score</label><div class="pbr-track"><div class="pbr-fill" id="pbf-${pi}" style="width:0%;background:var(--border)"></div></div><span class="pbr-val" id="pbv-${pi}" style="color:var(--muted)">—</span></div>
+        <div class="pillar-bar-row"><label>Pillar score</label><div class="pbr-track"><div class="pbr-fill" id="pbf-3" style="width:0%;background:var(--border)"></div></div><span class="pbr-val" id="pbv-3" style="color:var(--muted)">—</span></div>
+        <div class="action-plan" id="ap-3"><div class="ap-label">PRIORITY ACTIONS FOR THIS PILLAR</div><div id="ap-items-3"></div></div>
       </div>
-    </div>`).join('');
+    </div>`;
+  updateMaster();
+  document.getElementById('pc-3').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function rate(pi,qi,val){
   state[pi][qi]=state[pi][qi]===val?null:val;
-  [0,1,2].forEach(v=>{const b=document.getElementById('qb-'+pi+'-'+qi+'-'+v);if(b)b.className='qb'+(state[pi][qi]===v?' r'+v:'');});
+  [0,1,2].forEach(v=>{const b=document.getElementById(`qb-${pi}-${qi}-${v}`);if(b)b.className='qb'+(state[pi][qi]===v?' r'+v:'');});
   updateMaster();
 }
 
@@ -333,80 +622,127 @@ function getPillarScore(pi){
 function updateMaster(){
   const scores=PILLARS.map((_,pi)=>getPillarScore(pi));
   scores.forEach((s,pi)=>{
-    document.getElementById('pc-'+pi).className='pillar-card '+scCls(s);
-    document.getElementById('ps-'+pi).textContent=s===null?'—':s+'%';
-    document.getElementById('ps-'+pi).style.color=scCol(s);
-    document.getElementById('pbf-'+pi).style.width=(s||0)+'%';
-    document.getElementById('pbf-'+pi).style.background=scCol(s);
-    document.getElementById('pbv-'+pi).textContent=s===null?'—':s+'%';
-    document.getElementById('pbv-'+pi).style.color=scCol(s);
+    const psEl=document.getElementById(`ps-${pi}`); if(!psEl)return;
+    document.getElementById(`pc-${pi}`).className='pillar-card '+scCls(s);
+    psEl.textContent=s===null?'—':s+'%'; psEl.style.color=scCol(s);
+    const pf=document.getElementById(`pbf-${pi}`); if(pf){pf.style.width=(s||0)+'%';pf.style.background=scCol(s);}
+    const pv=document.getElementById(`pbv-${pi}`); if(pv){pv.textContent=s===null?'—':s+'%';pv.style.color=scCol(s);}
+    const ap=document.getElementById(`ap-${pi}`); if(!ap)return;
+    const band=scBand(s);
+    if(band&&s<80){
+      ap.className='action-plan show';
+      const actions=PILLARS[pi].actions[band]||[];
+      const acol=s>=60?'#D97706':s>=40?'#EF4444':'#DC2626';
+      document.getElementById(`ap-items-${pi}`).innerHTML=actions.map((a,i)=>`<div class="ap-item"><div class="ap-num" style="background:${acol}">${i+1}</div><div>${a}</div></div>`).join('');
+    } else if(ap) ap.className='action-plan';
   });
-  const rated=scores.filter(s=>s!==null);
+
   document.getElementById('pillar-bars').innerHTML=PILLARS.map((p,pi)=>{
     const s=scores[pi];
     return`<div class="pb-item"><div class="pb-top"><span class="pb-name">Pillar ${pi+1}: ${p.name}</span><span class="pb-val" style="color:${scCol(s)}">${s===null?'—':s+'%'}</span></div><div class="pb-bar"><div class="pb-fill" style="width:${s||0}%;background:${scCol(s)}"></div></div></div>`;
   }).join('');
-  document.getElementById('cta-rated').textContent=rated.length+'/4';
-  document.getElementById('cta-rated').style.color=rated.length===4?'var(--green)':'#64748B';
+
+  const rated=scores.filter(s=>s!==null);
   const co=document.getElementById('co').value.trim();
   document.getElementById('master-co').textContent=co?co.toUpperCase():'YOUR TEAM';
+
+  // Update progress steps
+  scores.forEach((s,pi)=>{
+    if(s!==null){
+      const stepEl=document.getElementById(`step-${pi+1}`); if(stepEl){stepEl.className='step done';const n=stepEl.querySelector('.step-num');if(n)n.textContent=pi+1;}
+      const lineEl=document.getElementById(`line-${pi+1}`); if(lineEl)lineEl.classList.add('done');
+    }
+  });
+
   if(!rated.length){
     document.getElementById('master-card').className='master-card';
-    document.getElementById('master-num').style.color='var(--border)';
-    document.getElementById('master-num').textContent='—';
+    document.getElementById('master-num').style.color='var(--border)'; document.getElementById('master-num').textContent='—';
     document.getElementById('master-headline').textContent='Complete all four pillars to see your score';
     document.getElementById('master-desc').textContent='Rate each statement above to generate your full audit score.';
-    document.getElementById('weak-box').className='weak-box';
-    document.getElementById('cta-overall').textContent='—';document.getElementById('cta-overall').style.color='var(--border)';
-    document.getElementById('cta-weakest').textContent='—';document.getElementById('cta-weakest').style.color='var(--border)';
-    return;
+    document.getElementById('weak-box').className='weak-box'; return;
   }
+
   const overall=Math.round(rated.reduce((a,b)=>a+b,0)/rated.length);
-  document.getElementById('master-num').textContent=overall;
-  document.getElementById('master-num').style.color=scCol(overall);
-  document.getElementById('cta-overall').textContent=overall+'%';
-  document.getElementById('cta-overall').style.color=scCol(overall);
+  document.getElementById('master-num').textContent=overall; document.getElementById('master-num').style.color=scCol(overall);
+
   const scored=scores.map((s,i)=>({s,i})).filter(x=>x.s!==null).sort((a,b)=>a.s-b.s);
   if(scored.length){
-    const w=scored[0];
-    const wb=document.getElementById('weak-box');
-    wb.className='weak-box show';
-    wb.style.background=scCol(w.s)+'15';
-    wb.style.borderColor=scCol(w.s)+'40';
-    document.getElementById('weak-name').textContent='Pillar '+(w.i+1)+': '+PILLARS[w.i].name+' — '+w.s+'%';
-    document.getElementById('weak-name').style.color=scCol(w.s);
-    document.getElementById('weak-fix').textContent=PILLARS[w.i].fix;
-    document.getElementById('cta-weakest').textContent='P'+(w.i+1);
-    document.getElementById('cta-weakest').style.color=scCol(w.s);
+    const w=scored[0]; const wb=document.getElementById('weak-box'); wb.className='weak-box show';
+    wb.style.borderColor=scCol(w.s);
+    document.getElementById('wpb-name').textContent=`Pillar ${w.i+1}: ${PILLARS[w.i].name} — ${w.s}%`;
+    document.getElementById('wpb-name').style.color=scCol(w.s);
+    document.getElementById('wpb-fix').textContent=PILLARS[w.i].fix;
   }
+
   const mc=document.getElementById('master-card'), mh=document.getElementById('master-headline'), md=document.getElementById('master-desc');
   if(overall>=80){mc.className='master-card excellent';mh.textContent='Strong operating system — variance well controlled';md.innerHTML='Your SDR Operating System is running close to the standard. <strong>The weakest pillar is where variance will emerge first</strong> — address it before it compounds.';}
-  else if(overall>=60){mc.className='master-card good';mh.textContent='Moderate health — structural gaps creating variance';md.innerHTML='The system is partially installed but has significant gaps. <strong>Variance is building in the pillars scoring below 60%.</strong> Fix the weakest pillar first.';}
-  else if(overall>=40){mc.className='master-card at-risk';mh.textContent='At risk — variance compounding across multiple pillars';md.innerHTML='<strong>Multiple pillars are failing.</strong> The team is operating on activity volume, not system output. Start at Input Control.';}
+  else if(overall>=60){mc.className='master-card good';mh.textContent='Moderate health — structural gaps creating variance';md.innerHTML='The system is partially installed. <strong>Variance is building in the pillars scoring below 60%.</strong> Fix the weakest pillar first.';}
+  else if(overall>=40){mc.className='master-card at-risk';mh.textContent='At risk — variance compounding across multiple pillars';md.innerHTML='<strong>Multiple pillars are failing.</strong> Pipeline unpredictability will continue until the structural failures are addressed. Start at Input Control.';}
   else{mc.className='master-card critical';mh.textContent='Critical — operating system is not installed';md.innerHTML='<strong>The SDR Operating System is not running.</strong> Every pillar needs installation. This is the board conversation waiting to happen.';}
+
+  // Show report button and download box if all 4 rated
+  if(gateUnlocked&&rated.length===4){
+    document.getElementById('report-btn').style.display='block';
+    document.getElementById('download-box').className='download-box show';
+    const s5=document.getElementById('step-5'); if(s5){s5.className='step done';const n=s5.querySelector('.step-num');if(n)n.textContent='✓';}
+    document.getElementById('line-4').classList.add('done');
+  }
+
+  updateCost();
+}
+
+function updateCost(){
+  if(!gateUnlocked)return;
+  const ts=parseFloat(document.getElementById('team-size').value)||0;
+  const dv=parseFloat(document.getElementById('deal-value').value)||0;
+  const mp=parseFloat(document.getElementById('meetings').value)||0;
+  const scores=PILLARS.map((_,pi)=>getPillarScore(pi)).filter(s=>s!==null);
+  if(!scores.length||!ts||!dv||!mp)return;
+  const overall=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+  const vf=Math.max(0,(100-overall)/100)*0.45;
+  const monthly=Math.round(ts*mp*dv*0.4*0.25*vf);
+  const annual=monthly*12;
+  const cpm=Math.round(dv*0.4*0.25*(vf*1.2));
+  document.getElementById('cost-monthly').textContent=fmt(monthly);
+  document.getElementById('cost-annual').textContent=fmt(annual);
+  document.getElementById('cost-meeting').textContent=fmt(cpm);
+  document.getElementById('cost-card').className='cost-card show';
+  const band=overall>=80?'low':overall>=60?'moderate':overall>=40?'high':'critical';
+  const bandText={low:'With an overall score of '+overall+'%, variance is well controlled. Estimated risk is low.',moderate:'With an overall score of '+overall+'%, structural gaps are creating measurable revenue leakage. The '+fmt(monthly)+'/month at risk grows as the gap compounds.',high:'With an overall score of '+overall+'%, multiple pillars are failing simultaneously. The '+fmt(annual)+' annual pipeline gap reflects compounding variance.',critical:'With an overall score of '+overall+'%, the operating system is not installed. The '+fmt(annual)+' annual figure represents the cost of operating without a system.'};
+  document.getElementById('cost-desc').innerHTML='<strong>How this is calculated:</strong> Based on '+ts+' reps × '+mp+' meetings/month × $'+Number(dv).toLocaleString()+' deal value × industry benchmark conversion rates, adjusted for your audit score of '+overall+'%. '+bandText[band]+' <strong>The SDR Operations Audit ($4,500–$12,000) pays for itself when it prevents one month of this leakage.</strong>';
 }
 
 function togglePillar(pi){
-  const b=document.getElementById('pb-'+pi), ch=document.getElementById('pc-chev-'+pi);
-  const open=b.classList.contains('open');
-  b.style.display=open?'none':'block'; b.classList.toggle('open',!open); ch.classList.toggle('open',!open);
+  const b=document.getElementById(`pb-${pi}`),ch=document.getElementById(`pc-chev-${pi}`);
+  if(!b)return; const open=b.classList.contains('open');
+  b.style.display=open?'none':'block'; b.classList.toggle('open',!open); ch&&ch.classList.toggle('open',!open);
+}
+
+function printReport(){
+  PILLARS.forEach((_,pi)=>{const b=document.getElementById(`pb-${pi}`);if(b){b.style.display='block';b.classList.add('open');}});
+  const co=document.getElementById('co').value.trim()||'SDR Team';
+  const scores=PILLARS.map((_,pi)=>getPillarScore(pi));
+  const rated=scores.filter(s=>s!==null);
+  const overall=rated.length?Math.round(rated.reduce((a,b)=>a+b,0)/rated.length):'—';
+  document.getElementById('print-meta').textContent=co+' · Overall Score: '+overall+'% · Generated '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+' · Wilberforce Moyo — The SDR Operating System';
+  window.print();
 }
 
 function resetAll(){
   if(!confirm('Reset all audit scores?'))return;
-  PILLARS.forEach((_,pi)=>{
-    state[pi].fill(null);
-    PILLARS[pi].qs.forEach((_,qi)=>[0,1,2].forEach(v=>{const b=document.getElementById('qb-'+pi+'-'+qi+'-'+v);if(b)b.className='qb';}));
-    document.getElementById('pc-'+pi).className='pillar-card';
-    document.getElementById('ps-'+pi).textContent='—';document.getElementById('ps-'+pi).style.color='var(--border)';
-    document.getElementById('pbf-'+pi).style.width='0%';document.getElementById('pbf-'+pi).style.background='var(--border)';
-    document.getElementById('pbv-'+pi).textContent='—';document.getElementById('pbv-'+pi).style.color='var(--muted)';
-  });
+  PILLARS.forEach((_,pi)=>{state[pi].fill(null);});
+  gateUnlocked=false;
+  PILLARS[3].locked=true;
   document.getElementById('co').value='';
-  updateMaster();
+  document.getElementById('cost-card').className='cost-card';
+  document.getElementById('download-box').className='download-box';
+  document.getElementById('report-btn').style.display='none';
+  document.getElementById('calc-card').classList.remove('unlocked');
+  document.getElementById('calc-lock-badge').style.display='';
+  init(); updateMaster();
 }
 
-init(); updateMaster();
+init();
 </script>
 </body>
 </html>
