@@ -156,7 +156,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .footer-name strong{color:#94A3B8}
 
 /* CALLOUT */
-.callout{background:var(--tblue);border-radius:10px;padding:14px 16px;margin-bottom:16px;border-left:4px solid var(--blue)}
+.intent-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;transition:all 0.2s}
+.intent-btn:hover{border-color:var(--navy);color:var(--navy)}
+.intent-btn.selected{background:var(--navy);border-color:var(--navy);color:#fff}
+border-radius:10px;padding:14px 16px;margin-bottom:16px;border-left:4px solid var(--blue)}
 .callout.amber{background:var(--tamber);border-left-color:var(--amber)}
 .callout.green{background:var(--tgreen);border-left-color:var(--green)}
 .callout-label{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:0.08em;margin-bottom:5px}
@@ -322,6 +325,50 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div class="card-desc">How you identify accounts that meet Filter 1 — the problem is active right now.</div>
     <div id="sourcing-signals"></div>
     <div class="score-row"><label>Signal score</label><div class="score-track"><div class="score-fill" id="sf-signals"></div></div><span class="score-val" id="sv-signals" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">ABM and intent data</div>
+  <div class="card">
+    <div class="card-title">Account-Based Marketing layer</div>
+    <div class="card-desc">Intent data identifies accounts showing active buying behaviour right now. It feeds Filter 2 (Problem Likelihood) with verified signals — making your account sourcing intelligence-driven rather than manual.</div>
+
+    <div style="margin-bottom:16px">
+      <label style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:8px">Intent data tool in use</label>
+      <div style="display:flex;flex-wrap:wrap;gap:8px" id="intent-tool-selector">
+        <button class="intent-btn" onclick="selectIntentTool(this,'Demandbase')">Demandbase</button>
+        <button class="intent-btn" onclick="selectIntentTool(this,'6sense')">6sense</button>
+        <button class="intent-btn" onclick="selectIntentTool(this,'Bombora')">Bombora</button>
+        <button class="intent-btn" onclick="selectIntentTool(this,'Apollo Intent')">Apollo Intent</button>
+        <button class="intent-btn" onclick="selectIntentTool(this,'LinkedIn Insights')">LinkedIn Insights</button>
+        <button class="intent-btn" onclick="selectIntentTool(this,'Manual signals only')">Manual signals only</button>
+      </div>
+      <div id="intent-tool-selected" style="font-size:12px;color:var(--dgreen);margin-top:8px;font-weight:600;display:none"></div>
+    </div>
+
+    <div id="sourcing-abm"></div>
+    <div class="score-row"><label>ABM score</label><div class="score-track"><div class="score-fill" id="sf-abm"></div></div><span class="score-val" id="sv-abm" style="color:var(--muted)">—</span></div>
+
+    <div style="background:var(--tgreen);border-radius:10px;padding:14px;margin-top:14px;border-left:4px solid var(--green)">
+      <div style="font-size:10px;font-weight:700;color:var(--dgreen);letter-spacing:0.08em;margin-bottom:8px">HOW ABM CONNECTS TO THE SDR OS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#fff;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px">INTENT DATA FEEDS</div>
+          <div style="font-size:12px;color:var(--text)">Filter 2 — Problem Likelihood. High intent score = verified active problem.</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px">ACCOUNT PRIORITISATION</div>
+          <div style="font-size:12px;color:var(--text)">Sequence high-intent accounts first. Intent score ranks the workflow queue.</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px">SIGNAL 03 ENRICHMENT</div>
+          <div style="font-size:12px;color:var(--text)">Intent drop-off is an early warning. Accounts cooling = Pipeline Composition risk.</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px">RE-ENTRY PREVENTION</div>
+          <div style="font-size:12px;color:var(--text)">Intent data confirms whether a removed account is genuinely active again before re-entry.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="sec-label">List management</div>
@@ -569,19 +616,30 @@ const SOURCING={
   data:[
     {t:'Apollo, ZoomInfo, or equivalent — verified contact data tool in use',h:'You need a verified email and phone source before sequences run',w:'Critical'},
     {t:'LinkedIn Sales Navigator or equivalent for signal monitoring',h:'Free LinkedIn limits search severely — Sales Nav or an equivalent is needed for scale',w:'Standard'},
-    {t:'Company database for firmographic filtering (e.g. Crunchbase, BuiltWith)',h:'Funding, tech stack, and growth data helps verify Filter 1 signals',w:'Standard'},
+    {t:'Company database for firmographic filtering (e.g. Crunchbase, BuiltWith)',h:'Funding, tech stack, and growth data helps verify Filter 2 signals',w:'Standard'},
     {t:'Data enrichment tool connected to CRM (e.g. Clearbit, Lusha)',h:'Enrichment keeps CRM properties current without manual updates',w:'Optional'},
   ],
   signals:[
     {t:'A process exists to identify accounts where the problem is active right now',h:'Not just ICP fit — active evidence the problem exists today',w:'Critical'},
-    {t:'Job posting monitoring in place for target roles (SDR Manager, RevOps, Head of Sales)',h:'Active hiring is one of the strongest Filter 1 signals',w:'Critical'},
+    {t:'Job posting monitoring in place for target roles (SDR Manager, RevOps, Head of Sales)',h:'Active hiring is one of the strongest Filter 2 signals',w:'Critical'},
     {t:'LinkedIn activity monitoring for target decision-makers',h:'Posts about pipeline, outbound, or SDR challenges are high-quality signals',w:'Standard'},
     {t:'Funding announcement monitoring in place (e.g. Crunchbase alerts)',h:'Series A/B raises with GTM objectives are strong trigger signals',w:'Standard'},
     {t:'News and leadership change monitoring for target accounts',h:'New VP Sales or CRO is one of the strongest signals of active buying intent',w:'Standard'},
   ],
+  abm:[
+    {t:'Intent data tool is configured and connected to CRM',h:'Demandbase, 6sense, Bombora, Apollo Intent, or LinkedIn Insights — any one of these is sufficient',w:'Critical'},
+    {t:'Intent topics are defined — keyword clusters that signal your buyer is researching now',h:'Examples: SDR operations, outbound sequencing, pipeline predictability, sales development',w:'Critical'},
+    {t:'High-intent accounts are surfaced weekly and cross-referenced with ICP criteria',h:'Intent alone is not enough — the account must still meet both input filters',w:'Critical'},
+    {t:'Intent score threshold is defined — minimum score before an account enters the workflow',h:'Each tool scores differently — define your own threshold (e.g. above 70 in Demandbase)',w:'Standard'},
+    {t:'Accounts are prioritised in the workflow by intent score — highest intent sequenced first',h:'Intent ranking determines sequence order, not rep preference',w:'Standard'},
+    {t:'Intent data is logged as a CRM property for each account',h:'Required to track whether intent signals correlate with conversion — closes the ABM loop',w:'Standard'},
+    {t:'Intent drop-off is monitored — accounts showing cooling intent are flagged for review',h:'Cooling intent before meeting booking is an early Pipeline Composition warning',w:'Optional'},
+    {t:'Re-entry decisions are validated against current intent score',h:'A removed account should only re-enter if intent data confirms the problem is active again',w:'Optional'},
+  ],
   list:[
     {t:'Master account list exists — all target accounts in one place',h:'No master list means no visibility into overlap, re-entry, or coverage',w:'Critical'},
-    {t:'Accounts are tagged with the signal that triggered their addition',h:'Without this, you cannot measure Filter 1 compliance',w:'Critical'},
+    {t:'Accounts are tagged with the signal that triggered their addition',h:'Without this, you cannot measure Filter 2 compliance',w:'Critical'},
+    {t:'Intent score is recorded at the point of account entry',h:'Baseline intent score lets you track whether accounts entered at the right moment',w:'Standard'},
     {t:'Removed accounts are flagged with a removal reason',h:'Required for Account Re-Entry Rate tracking — Signal 01',w:'Critical'},
     {t:'List is reviewed and refreshed at least monthly',h:'Stale accounts contaminate the pipeline composition score',w:'Standard'},
   ]
@@ -643,7 +701,8 @@ const ONBOARDING={
 };
 
 // ── RENDER CHECKLISTS ──
-const sourcing_state={data:{},signals:{},list:{}};
+const sourcing_state={data:{},signals:{},abm:{},list:{}};
+let selectedIntentTool='';
 const tech_state={core:{},config:{},data:{}};
 const onboard_state={knowledge:{},access:{},week1:{},day30:{}};
 
@@ -659,6 +718,16 @@ function renderChecklist(containerId,items,stateObj,groupKey,updateFn){
       <span class="check-badge">${item.w}</span>
       ${item.w==='Optional'?`<button class="check-skip" id="skip-${groupKey}-${i}" onclick="${updateFn}('${groupKey}',${i},'skip')">N/A</button>`:''}
     </div>`).join('');
+}
+
+function selectIntentTool(btn,tool){
+  document.querySelectorAll('.intent-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedIntentTool=tool;
+  const el=document.getElementById('intent-tool-selected');
+  el.style.display='block';
+  el.textContent='Selected: '+tool;
+  updateSourcingStatus();
 }
 
 function toggleSourcing(group,i,action){
@@ -691,7 +760,7 @@ function updateSourcingScore(group){
 }
 
 function updateSourcingStatus(){
-  const groups=['data','signals','list'];
+  const groups=['data','signals','abm','list'];
   const scores=groups.map(g=>{
     const items=SOURCING[g];
     const done=Object.values(sourcing_state[g]).filter(v=>v===true).length;
@@ -708,8 +777,9 @@ function updateSourcingStatus(){
   const sc=document.getElementById('sourcing-status');
   const h=document.getElementById('sourcing-headline');
   const d=document.getElementById('sourcing-desc');
-  if(overall>=80){sc.className='status-card ready';h.textContent='Account sourcing infrastructure is ready';d.innerHTML='Data sources, signal monitoring, and list management are all in place. <strong>Input Control can run reliably on this foundation.</strong>';}
-  else if(overall>=60){sc.className='status-card partial';h.textContent='Partial readiness — gaps in sourcing infrastructure';d.innerHTML='Some sourcing components are missing. <strong>Address the Critical items before running Input Control at scale.</strong>';}
+  const hasIntent=selectedIntentTool&&selectedIntentTool!=='Manual signals only';
+  if(overall>=80){sc.className='status-card ready';h.textContent='Account sourcing infrastructure is ready'+(hasIntent?' — ABM layer active':'');d.innerHTML='Data sources, signal monitoring, '+(hasIntent?'intent data, ':'')+'and list management are all in place. <strong>Input Control can run reliably on this foundation.</strong>';}
+  else if(overall>=60){sc.className='status-card partial';h.textContent='Partial readiness — gaps in sourcing infrastructure';d.innerHTML='Some sourcing components are missing. <strong>Address the Critical items before running Input Control at scale.</strong>'+(hasIntent?' Intent data is configured — complete the ABM checklist to maximise its value.':'');}
   else{sc.className='status-card notready';h.textContent='Not ready — sourcing infrastructure needs work';d.innerHTML='<strong>Significant gaps in data sources or signal monitoring.</strong> Input Control will produce inconsistent results without fixing these first.';}
 }
 
@@ -862,6 +932,7 @@ function copyOnboarding(){
 function init(){
   renderChecklist('sourcing-data',SOURCING.data,sourcing_state,'data','toggleSourcing');
   renderChecklist('sourcing-signals',SOURCING.signals,sourcing_state,'signals','toggleSourcing');
+  renderChecklist('sourcing-abm',SOURCING.abm,sourcing_state,'abm','toggleSourcing');
   renderChecklist('sourcing-list',SOURCING.list,sourcing_state,'list','toggleSourcing');
   renderTechChecklist('tech-core',TECH.core,'core');
   renderTechChecklist('tech-config',TECH.config,'config');
