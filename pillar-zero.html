@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar 0 — Foundation | SDR Operating System</title>
+<meta property="og:title" content="Pillar 0 Foundation — SDR Operating System">
+<meta property="og:description" content="Build the foundation before the four pillars run. ICP Definition, Account Sourcing, Tech Stack Readiness, Rep Onboarding Standard.">
+<meta property="og:image" content="https://wilberforcemoyo.github.io/sdr-tools/og_preview.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0E1E35;--navy2:#1B2A4A;--green:#10B981;--dgreen:#059669;--lgreen:#D1FAE5;--tgreen:#ECFDF5;
+  --red:#EF4444;--dred:#DC2626;--lred:#FEE2E2;--tred:#FFF5F5;
+  --amber:#F59E0B;--lamber:#FEF3C7;--tamber:#FFFBEB;
+  --blue:#3B82F6;--lblue:#DBEAFE;--tblue:#EFF6FF;
+  --gold:#C9A84C;--light:#F1F5F9;--border:#E2E8F0;
+  --white:#FFFFFF;--text:#0F172A;--muted:#64748B;--card:#FFFFFF;--bg:#F8FAFC;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+.nav{background:#060F1C;padding:10px 16px;text-align:center;font-size:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px}
+.nav span{color:#475569;font-weight:600;letter-spacing:0.06em}
+.nav a{color:#94A3B8;text-decoration:none}.nav a:hover,.nav a.active{color:var(--gold)}
+
+.header{background:var(--navy);padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold)}
+.header-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);background:rgba(201,168,76,0.12);padding:6px 14px;border-radius:20px;margin-bottom:20px}
+.header h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,5vw,44px);color:#fff;line-height:1.15;margin-bottom:12px}
+.header h1 span{color:var(--green)}
+.header-sub{font-size:16px;color:#94A3B8;max-width:480px;margin:0 auto 24px;line-height:1.6}
+.header-author{font-size:13px;color:#64748B}
+.header-author strong{color:var(--gold)}
+
+/* TAB NAV */
+.tab-bar{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.tab-inner{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{padding:14px 8px;text-align:center;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;font-size:12px;font-weight:500;color:var(--muted)}
+.tab:hover{background:var(--bg)}
+.tab.on{border-bottom-color:var(--gold);color:var(--navy)}
+.tab-num{display:block;font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:2px;transition:color 0.2s}
+.tab.on .tab-num{color:var(--gold)}
+.tab-done .tab-num{color:var(--green)}
+.tab-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:0.06em}
+@media(max-width:480px){.tab-label{display:none}}
+
+.main{max-width:760px;margin:0 auto;padding:28px 16px 80px}
+.section{display:none}.section.on{display:block}
+
+.sec-label{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.card-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.card-desc{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6}
+
+/* FORM FIELDS */
+.field{margin-bottom:16px}
+.field label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;background:var(--bg);transition:border-color 0.2s;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--navy)}
+.field textarea{min-height:72px;line-height:1.5}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.field-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* TAG INPUT */
+.tag-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);min-height:42px;cursor:text}
+.tag-wrap:focus-within{border-color:var(--navy)}
+.tag{display:inline-flex;align-items:center;gap:4px;background:var(--navy);color:#fff;font-size:12px;padding:3px 8px;border-radius:6px}
+.tag-del{cursor:pointer;opacity:0.7;font-size:14px;line-height:1}.tag-del:hover{opacity:1}
+.tag-input{border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:13px;background:transparent;min-width:120px;flex:1}
+
+/* ICP OUTPUT */
+.icp-output{background:var(--tblue);border:1px solid var(--lblue);border-radius:12px;padding:18px;margin-top:16px;display:none}
+.icp-output.show{display:block}
+.icp-output-title{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:0.06em;margin-bottom:12px;text-transform:uppercase}
+.icp-block{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--lblue)}
+.icp-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.icp-block-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+.icp-block-value{font-size:14px;color:var(--text);line-height:1.5}
+
+/* CHECKLIST */
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.check-item:last-child{border-bottom:none;padding-bottom:0}
+.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all 0.2s;background:#fff}
+.check-box.on{background:var(--green);border-color:var(--green)}
+.check-box.on::after{content:'';width:4px;height:8px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px);display:block}
+.check-box.na{background:var(--muted);border-color:var(--muted)}
+.check-box.na::after{content:'—';color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:none;transform:none;width:auto;height:auto}
+.check-label{flex:1}
+.check-text{font-size:13px;color:var(--text);line-height:1.4;margin-bottom:2px}
+.check-hint{font-size:11px;color:var(--muted);line-height:1.4}
+.check-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--light);color:var(--muted);flex-shrink:0;white-space:nowrap}
+.check-skip{font-size:10px;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:5px;padding:3px 7px;cursor:pointer;flex-shrink:0;transition:all 0.2s}
+.check-skip:hover{border-color:var(--muted);color:var(--text)}
+.check-skip.on{background:var(--light);color:var(--muted)}
+
+/* SCORE BAR */
+.score-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.score-row label{font-size:11px;color:var(--muted);width:90px;flex-shrink:0}
+.score-track{flex:1;height:5px;background:var(--light);border-radius:3px;overflow:hidden}
+.score-fill{height:5px;border-radius:3px;transition:width 0.4s,background 0.3s}
+.score-val{font-size:12px;font-weight:600;width:36px;text-align:right}
+
+/* ASSESSMENT BUTTONS */
+.assess-btns{display:flex;gap:4px;flex-shrink:0;margin-top:1px}
+.ab{width:30px;height:26px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:10px;font-weight:700;color:var(--muted);transition:all 0.15s}
+.ab:hover{border-color:var(--navy);color:var(--navy)}
+.ab.r0{background:var(--tred);border-color:var(--red);color:var(--dred)}
+.ab.r1{background:var(--tamber);border-color:var(--amber);color:#92400E}
+.ab.r2{background:var(--tgreen);border-color:var(--green);color:var(--dgreen)}
+
+/* STATUS CARDS */
+.status-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:20px;transition:border-color 0.3s}
+.status-card.ready{border-left:4px solid var(--green)}
+.status-card.partial{border-left:4px solid var(--amber)}
+.status-card.notready{border-left:4px solid var(--red)}
+.status-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.status-headline{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);line-height:1.2}
+.status-score{font-family:'DM Serif Display',serif;font-size:48px;line-height:1;transition:color 0.3s}
+.status-denom{font-size:12px;color:var(--muted)}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+@media(max-width:480px){.status-grid{grid-template-columns:1fr}}
+.sg-item{background:var(--bg);border-radius:10px;padding:10px 12px}
+.sg-name{font-size:11px;color:var(--muted);margin-bottom:4px}
+.sg-bar-row{display:flex;align-items:center;gap:8px}
+.sg-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.sg-fill{height:4px;border-radius:2px;transition:width 0.4s,background 0.3s}
+.sg-val{font-size:12px;font-weight:600;width:28px;text-align:right}
+.status-desc{font-size:14px;color:var(--muted);line-height:1.7;padding-top:12px;border-top:1px solid var(--border)}
+.status-desc strong{color:var(--text)}
+
+/* NAVIGATION BUTTONS */
+.nav-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:12px;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--muted)}
+.btn:hover{background:var(--light);color:var(--text)}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:#fff}.btn-primary:hover{background:var(--navy2)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600}.btn-gold:hover{opacity:0.9}
+.btn-copy{background:var(--tgreen);border-color:var(--lgreen);color:var(--dgreen);font-weight:600}
+.btn-full{grid-column:span 2}
+
+/* CTA */
+.cta{background:var(--navy);border-radius:16px;padding:28px 24px;text-align:center;margin-bottom:40px}
+.cta-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);margin-bottom:12px}
+.cta-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;margin-bottom:8px;line-height:1.3}
+.cta-desc{font-size:14px;color:#94A3B8;line-height:1.6;margin-bottom:20px;max-width:440px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);font-size:14px;font-weight:600;padding:13px 26px;border-radius:10px;text-decoration:none;transition:opacity 0.2s}
+.cta-btn:hover{opacity:0.9}
+
+.footer{background:var(--navy);text-align:center;padding:28px 24px}
+.footer-catchphrase{font-family:'DM Serif Display',serif;font-size:18px;color:var(--gold);margin-bottom:6px}
+.footer-name{font-size:13px;color:#475569}
+.footer-name strong{color:#94A3B8}
+
+/* CALLOUT */
+.callout{background:var(--tblue);border-radius:10px;padding:14px 16px;margin-bottom:16px;border-left:4px solid var(--blue)}
+.callout.amber{background:var(--tamber);border-left-color:var(--amber)}
+.callout.green{background:var(--tgreen);border-left-color:var(--green)}
+.callout-label{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:0.08em;margin-bottom:5px}
+.callout.amber .callout-label{color:var(--amber)}
+.callout.green .callout-label{color:var(--dgreen)}
+.callout-text{font-size:13px;color:var(--text);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <span>SDR OS TOOLS:</span>
+  <a href="https://wilberforcemoyo.github.io/sdr-tools/">Signal Dashboard</a>
+  <a href="https://wilberforcemoyo.github.io/sdr-tools/input-control.html">Input Control</a>
+  <a href="https://wilberforcemoyo.github.io/sdr-tools/execution-scorecard.html">Execution Scorecard</a>
+  <a href="https://wilberforcemoyo.github.io/sdr-tools/rhythm-planner.html">Rhythm Planner</a>
+  <a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html">Full Audit</a>
+</div>
+
+<div class="header">
+  <div class="header-tag">PILLAR 0 · SDR OPERATING SYSTEM</div>
+  <h1>Foundation<br><span>Builder</span></h1>
+  <p class="header-sub">Build the infrastructure before the four pillars run. ICP, account sourcing, tech stack, and rep onboarding — all in one place.</p>
+  <p class="header-author">Built by <strong>Wilberforce Moyo</strong> · 18 Years SDR Operations</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <div class="tab-inner">
+    <div class="tab on" id="tab-0" onclick="switchTab(0)"><span class="tab-num">01</span><span class="tab-label">ICP Definition</span></div>
+    <div class="tab" id="tab-1" onclick="switchTab(1)"><span class="tab-num">02</span><span class="tab-label">Account Sourcing</span></div>
+    <div class="tab" id="tab-2" onclick="switchTab(2)"><span class="tab-num">03</span><span class="tab-label">Tech Stack</span></div>
+    <div class="tab" id="tab-3" onclick="switchTab(3)"><span class="tab-num">04</span><span class="tab-label">Rep Onboarding</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION 0 — ICP DEFINITION        -->
+<!-- ══════════════════════════════════ -->
+<div class="section on" id="sec-0">
+
+  <div class="callout">
+    <div class="callout-label">WHAT THIS DOES</div>
+    <div class="callout-text">Fill in the fields below. When you click Generate ICP, the tool outputs a written Ideal Customer Profile you can share with your team and use as the standard for Filter 1.</div>
+  </div>
+
+  <div class="sec-label">Company profile</div>
+  <div class="card">
+    <div class="field-row">
+      <div class="field"><label>Company name</label><input type="text" id="icp-company" placeholder="e.g. Acme Corp" oninput="updateICP()"></div>
+      <div class="field"><label>Your product / solution</label><input type="text" id="icp-product" placeholder="e.g. Sales engagement platform" oninput="updateICP()"></div>
+    </div>
+    <div class="field"><label>The core problem you solve — in one sentence</label>
+      <input type="text" id="icp-problem" placeholder="e.g. SDR teams produce activity but not predictable pipeline" oninput="updateICP()"></div>
+    <div class="field"><label>Proof of success — one outcome a customer achieved</label>
+      <input type="text" id="icp-proof" placeholder="e.g. Reduced time-to-pipeline from 6 weeks to 2 weeks" oninput="updateICP()"></div>
+  </div>
+
+  <div class="sec-label">Target company criteria</div>
+  <div class="card">
+    <div class="field-row">
+      <div class="field"><label>Company size (employees)</label>
+        <select id="icp-size" onchange="updateICP()">
+          <option value="">Select range</option>
+          <option>1 – 10 (pre-revenue)</option>
+          <option>11 – 50 (early stage)</option>
+          <option>51 – 200 (scaling)</option>
+          <option>201 – 500 (growth)</option>
+          <option>501 – 1000 (mid-market)</option>
+          <option>1000+ (enterprise)</option>
+        </select></div>
+      <div class="field"><label>Funding stage</label>
+        <select id="icp-funding" onchange="updateICP()">
+          <option value="">Select stage</option>
+          <option>Bootstrapped</option>
+          <option>Pre-seed</option>
+          <option>Seed</option>
+          <option>Series A</option>
+          <option>Series B</option>
+          <option>Series C+</option>
+          <option>Public</option>
+        </select></div>
+    </div>
+    <div class="field"><label>Industries (type and press Enter to add)</label>
+      <div class="tag-wrap" id="tag-industry" onclick="document.getElementById('tag-input-industry').focus()">
+        <input class="tag-input" id="tag-input-industry" placeholder="e.g. B2B SaaS" onkeydown="addTag(event,'industry')">
+      </div></div>
+    <div class="field"><label>Geographies (type and press Enter)</label>
+      <div class="tag-wrap" id="tag-geo" onclick="document.getElementById('tag-input-geo').focus()">
+        <input class="tag-input" id="tag-input-geo" placeholder="e.g. United States" onkeydown="addTag(event,'geo')">
+      </div></div>
+    <div class="field"><label>Revenue range (ARR or MRR if known)</label>
+      <input type="text" id="icp-revenue" placeholder="e.g. $1M – $10M ARR" oninput="updateICP()"></div>
+  </div>
+
+  <div class="sec-label">Target buyer criteria</div>
+  <div class="card">
+    <div class="field"><label>Primary decision-maker title(s) (type and press Enter)</label>
+      <div class="tag-wrap" id="tag-titles" onclick="document.getElementById('tag-input-titles').focus()">
+        <input class="tag-input" id="tag-input-titles" placeholder="e.g. VP Sales" onkeydown="addTag(event,'titles')">
+      </div></div>
+    <div class="field"><label>What does this person care about most?</label>
+      <input type="text" id="icp-cares" placeholder="e.g. Pipeline predictability, hitting the forecast, scaling the team" oninput="updateICP()"></div>
+    <div class="field"><label>What keeps them up at night?</label>
+      <input type="text" id="icp-pain" placeholder="e.g. Activity is high but pipeline quality is inconsistent" oninput="updateICP()"></div>
+    <div class="field"><label>What does a successful outcome look like for them?</label>
+      <input type="text" id="icp-outcome" placeholder="e.g. Predictable pipeline, reps running a consistent system" oninput="updateICP()"></div>
+  </div>
+
+  <div class="sec-label">Trigger signals</div>
+  <div class="card">
+    <div class="card-desc">These are the signals that confirm this is the right account at the right time. These become your Filter 1 (Problem Likelihood) criteria.</div>
+    <div class="field"><label>Strong signals — evidence the problem is active now (type and press Enter)</label>
+      <div class="tag-wrap" id="tag-signals" onclick="document.getElementById('tag-input-signals').focus()">
+        <input class="tag-input" id="tag-input-signals" placeholder="e.g. Hiring SDR Manager" onkeydown="addTag(event,'signals')">
+      </div>
+      <div class="field-hint">Examples: hiring for SDR/RevOps roles, recent funding, new sales leadership, posted about pipeline challenges</div>
+    </div>
+    <div class="field"><label>Disqualifying signals — accounts that look like ICP but are not (type and press Enter)</label>
+      <div class="tag-wrap" id="tag-dq" onclick="document.getElementById('tag-input-dq').focus()">
+        <input class="tag-input" id="tag-input-dq" placeholder="e.g. No outbound motion" onkeydown="addTag(event,'dq')">
+      </div>
+      <div class="field-hint">Examples: no outbound function, recent layoffs in sales, just completed a similar engagement</div>
+    </div>
+  </div>
+
+  <!-- ICP OUTPUT -->
+  <div class="icp-output" id="icp-output">
+    <div class="icp-output-title">GENERATED ICP — <span id="icp-output-company"></span></div>
+    <div id="icp-output-content"></div>
+  </div>
+
+  <div class="nav-btns" style="margin-top:16px">
+    <button class="btn btn-copy btn-full" onclick="generateICP()">Generate written ICP →</button>
+    <button class="btn" onclick="copyICP()">Copy ICP to clipboard</button>
+    <button class="btn btn-primary" onclick="switchTab(1)">Next — Account Sourcing →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION 1 — ACCOUNT SOURCING      -->
+<!-- ══════════════════════════════════ -->
+<div class="section" id="sec-1">
+
+  <div class="callout amber">
+    <div class="callout-label">HOW TO USE</div>
+    <div class="callout-text">Check each item that is in place. Skip items that do not apply to your current setup. The score tells you whether your sourcing infrastructure is ready to run Input Control.</div>
+  </div>
+
+  <div class="sec-label">Data sources</div>
+  <div class="card">
+    <div class="card-title">Account and contact data</div>
+    <div class="card-desc">The sources you use to find and verify accounts before they enter the workflow.</div>
+    <div id="sourcing-data"></div>
+    <div class="score-row"><label>Data score</label><div class="score-track"><div class="score-fill" id="sf-data"></div></div><span class="score-val" id="sv-data" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">Signal identification</div>
+  <div class="card">
+    <div class="card-title">Trigger signal monitoring</div>
+    <div class="card-desc">How you identify accounts that meet Filter 1 — the problem is active right now.</div>
+    <div id="sourcing-signals"></div>
+    <div class="score-row"><label>Signal score</label><div class="score-track"><div class="score-fill" id="sf-signals"></div></div><span class="score-val" id="sv-signals" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">List management</div>
+  <div class="card">
+    <div class="card-title">Account list hygiene</div>
+    <div class="card-desc">How accounts are managed, maintained, and removed when no longer relevant.</div>
+    <div id="sourcing-list"></div>
+    <div class="score-row"><label>List score</label><div class="score-track"><div class="score-fill" id="sf-list"></div></div><span class="score-val" id="sv-list" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="status-card" id="sourcing-status">
+    <div class="status-top"><div><div class="status-headline" id="sourcing-headline">Check all items to see your sourcing readiness</div></div>
+      <div><div class="status-score" id="sourcing-score" style="color:var(--border)">—</div><div class="status-denom">%</div></div>
+    </div>
+    <div class="status-desc" id="sourcing-desc">Tick each item that is in place. Skip items that do not apply.</div>
+  </div>
+
+  <div class="nav-btns">
+    <button class="btn" onclick="switchTab(0)">← ICP Definition</button>
+    <button class="btn btn-primary" onclick="switchTab(2)">Next — Tech Stack →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION 2 — TECH STACK            -->
+<!-- ══════════════════════════════════ -->
+<div class="section" id="sec-2">
+
+  <div class="callout">
+    <div class="callout-label">HOW TO SCORE</div>
+    <div class="callout-text">Rate each tool: 0 = Not in place, 1 = In place but not configured correctly, 2 = In place and configured. A score below 60% means the tech stack cannot support the four pillars reliably.</div>
+  </div>
+
+  <div class="sec-label">Core stack</div>
+  <div class="card">
+    <div class="card-title">Essential tools</div>
+    <div class="card-desc">These must be in place before the system can run. A missing core tool is a blocker.</div>
+    <div id="tech-core"></div>
+    <div class="score-row"><label>Core score</label><div class="score-track"><div class="score-fill" id="tf-core"></div></div><span class="score-val" id="tv-core" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">Configuration quality</div>
+  <div class="card">
+    <div class="card-title">HubSpot and CRM setup</div>
+    <div class="card-desc">Having the tool is not enough. The configuration determines whether signals can run.</div>
+    <div id="tech-config"></div>
+    <div class="score-row"><label>Config score</label><div class="score-track"><div class="score-fill" id="tf-config"></div></div><span class="score-val" id="tv-config" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">Data and reporting</div>
+  <div class="card">
+    <div class="card-title">Visibility and tracking</div>
+    <div class="card-desc">Can you see what is happening across the four signal thresholds right now?</div>
+    <div id="tech-data"></div>
+    <div class="score-row"><label>Data score</label><div class="score-track"><div class="score-fill" id="tf-data"></div></div><span class="score-val" id="tv-data" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="status-card" id="tech-status">
+    <div class="status-top"><div><div class="status-headline" id="tech-headline">Score all items to see tech stack readiness</div></div>
+      <div><div class="status-score" id="tech-score" style="color:var(--border)">—</div><div class="status-denom">/ 100</div></div>
+    </div>
+    <div class="status-grid" id="tech-breakdown"></div>
+    <div class="status-desc" id="tech-desc">Rate each tool above to generate your tech stack readiness score.</div>
+  </div>
+
+  <div class="nav-btns">
+    <button class="btn" onclick="switchTab(1)">← Account Sourcing</button>
+    <button class="btn btn-primary" onclick="switchTab(3)">Next — Rep Onboarding →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION 3 — REP ONBOARDING        -->
+<!-- ══════════════════════════════════ -->
+<div class="section" id="sec-3">
+
+  <div class="callout green">
+    <div class="callout-label">HOW TO USE</div>
+    <div class="callout-text">Use this as a checklist for every new SDR hire. No rep should touch a sequence until all Critical items are checked. Track each rep separately by adding their name above.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="field-row">
+      <div class="field"><label>Rep name</label><input type="text" id="rep-name" placeholder="e.g. Sarah Johnson" oninput="updateRepName()"></div>
+      <div class="field"><label>Start date</label><input type="date" id="rep-start"></div>
+    </div>
+  </div>
+
+  <div class="sec-label">System knowledge</div>
+  <div class="card">
+    <div class="card-title">What the rep must know before touching a sequence</div>
+    <div id="onboard-knowledge"></div>
+    <div class="score-row"><label>Knowledge</label><div class="score-track"><div class="score-fill" id="of-knowledge"></div></div><span class="score-val" id="ov-knowledge" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">System access</div>
+  <div class="card">
+    <div class="card-title">Tools configured and access granted</div>
+    <div id="onboard-access"></div>
+    <div class="score-row"><label>Access</label><div class="score-track"><div class="score-fill" id="of-access"></div></div><span class="score-val" id="ov-access" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">Week 1 milestones</div>
+  <div class="card">
+    <div class="card-title">What the rep must complete in their first week</div>
+    <div id="onboard-week1"></div>
+    <div class="score-row"><label>Week 1</label><div class="score-track"><div class="score-fill" id="of-week1"></div></div><span class="score-val" id="ov-week1" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="sec-label">30-day milestones</div>
+  <div class="card">
+    <div class="card-title">What the rep must achieve in their first 30 days</div>
+    <div id="onboard-30day"></div>
+    <div class="score-row"><label>30 days</label><div class="score-track"><div class="score-fill" id="of-30day"></div></div><span class="score-val" id="ov-30day" style="color:var(--muted)">—</span></div>
+  </div>
+
+  <div class="status-card" id="onboard-status">
+    <div class="status-top">
+      <div><div class="status-headline" id="onboard-headline" style="font-size:16px">New rep onboarding progress</div></div>
+      <div><div class="status-score" id="onboard-score" style="color:var(--border)">—</div><div class="status-denom">%</div></div>
+    </div>
+    <div class="status-desc" id="onboard-desc">Check each item as the rep completes it. Critical items must all be checked before the rep is cleared to sequence.</div>
+  </div>
+
+  <div class="nav-btns">
+    <button class="btn" onclick="switchTab(2)">← Tech Stack</button>
+    <button class="btn btn-copy" onclick="copyOnboarding()">Copy onboarding checklist</button>
+    <button class="btn btn-gold btn-full" onclick="switchTab(0)">View foundation summary →</button>
+  </div>
+
+  <div class="cta">
+    <div class="cta-tag">SDR OS INSTALLATION · $15,000 – $35,000</div>
+    <div class="cta-title">Need help building the full foundation?</div>
+    <div class="cta-desc">The SDR OS Installation builds all five pillars — from ICP definition through to running signals inside HubSpot. Eight weeks. A running system at the end.</div>
+    <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="cta-btn">Talk to Wilberforce →</a>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  <div class="footer-catchphrase">Reducing Variance. Increasing Predictability.</div>
+  <div class="footer-name"><strong>Wilberforce Moyo</strong> · The SDR Operating System</div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(i){
+  document.querySelectorAll('.section').forEach((s,idx)=>{s.className='section'+(idx===i?' on':'')});
+  document.querySelectorAll('.tab').forEach((t,idx)=>{
+    t.className='tab'+(idx===i?' on':'');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── TAG INPUT ──
+const tags={industry:[],geo:[],titles:[],signals:[],dq:[]};
+function addTag(e,key){
+  if(e.key!=='Enter'&&e.key!==',')return;
+  e.preventDefault();
+  const val=e.target.value.trim();
+  if(!val||tags[key].includes(val))return;
+  tags[key].push(val);
+  e.target.value='';
+  renderTags(key);
+  updateICP();
+}
+function removeTag(key,val){
+  tags[key]=tags[key].filter(t=>t!==val);
+  renderTags(key);
+  updateICP();
+}
+function renderTags(key){
+  const wrap=document.getElementById('tag-'+key);
+  const input=document.getElementById('tag-input-'+key);
+  const existing=[...wrap.querySelectorAll('.tag')];
+  existing.forEach(el=>el.remove());
+  tags[key].forEach(t=>{
+    const span=document.createElement('span');
+    span.className='tag';
+    span.innerHTML=t+' <span class="tag-del" onclick="removeTag(\''+key+'\',\''+t.replace(/'/g,"\\'")+'\')">&times;</span>';
+    wrap.insertBefore(span,input);
+  });
+}
+
+// ── ICP GENERATION ──
+function v(id){return document.getElementById(id)?.value?.trim()||''}
+function updateICP(){
+  const company=v('icp-company');
+  if(company) document.getElementById('icp-output-company').textContent=company;
+}
+function generateICP(){
+  const out=document.getElementById('icp-output');
+  const company=v('icp-company')||'[Company]';
+  const product=v('icp-product')||'[Product]';
+  const problem=v('icp-problem')||'[Problem not defined]';
+  const proof=v('icp-proof')||'[No proof point added]';
+  const size=v('icp-size')||'[Not specified]';
+  const funding=v('icp-funding')||'[Not specified]';
+  const revenue=v('icp-revenue')||'[Not specified]';
+  const cares=v('icp-cares')||'[Not specified]';
+  const pain=v('icp-pain')||'[Not specified]';
+  const outcome=v('icp-outcome')||'[Not specified]';
+  const industries=tags.industry.length?tags.industry.join(', '):'[Not specified]';
+  const geos=tags.geo.length?tags.geo.join(', '):'[Not specified]';
+  const titles=tags.titles.length?tags.titles.join(', '):'[Not specified]';
+  const signals=tags.signals.length?tags.signals.join(' · '):'[Not specified]';
+  const dq=tags.dq.length?tags.dq.join(' · '):'[Not specified]';
+
+  document.getElementById('icp-output-company').textContent=company;
+  document.getElementById('icp-output-content').innerHTML=`
+    <div class="icp-block"><div class="icp-block-label">Product / Solution</div><div class="icp-block-value">${product}</div></div>
+    <div class="icp-block"><div class="icp-block-label">Core Problem We Solve</div><div class="icp-block-value">${problem}</div></div>
+    <div class="icp-block"><div class="icp-block-label">Proof of Success</div><div class="icp-block-value">${proof}</div></div>
+    <div class="icp-block"><div class="icp-block-label">Target Company Profile</div><div class="icp-block-value">
+      <strong>Industries:</strong> ${industries}<br>
+      <strong>Company size:</strong> ${size}<br>
+      <strong>Funding stage:</strong> ${funding}<br>
+      <strong>Revenue range:</strong> ${revenue}<br>
+      <strong>Geographies:</strong> ${geos}
+    </div></div>
+    <div class="icp-block"><div class="icp-block-label">Target Buyer Profile</div><div class="icp-block-value">
+      <strong>Titles:</strong> ${titles}<br>
+      <strong>What they care about:</strong> ${cares}<br>
+      <strong>Their core pain:</strong> ${pain}<br>
+      <strong>Successful outcome for them:</strong> ${outcome}
+    </div></div>
+    <div class="icp-block"><div class="icp-block-label">Filter 1 — Trigger Signals (Problem is Active Now)</div><div class="icp-block-value">${signals}</div></div>
+    <div class="icp-block"><div class="icp-block-label">Disqualifying Signals (Looks Like ICP But Is Not)</div><div class="icp-block-value">${dq}</div></div>
+  `;
+  out.className='icp-output show';
+}
+function copyICP(){
+  const el=document.getElementById('icp-output-content');
+  if(!el||el.innerHTML===''){alert('Generate the ICP first.');return;}
+  const text=el.innerText;
+  navigator.clipboard.writeText('ICP — '+v('icp-company')+'\n\n'+text)
+    .then(()=>alert('ICP copied to clipboard.'))
+    .catch(()=>alert('Copy failed.'));
+}
+
+// ── CHECKLIST DATA ──
+const SOURCING={
+  data:[
+    {t:'Apollo, ZoomInfo, or equivalent — verified contact data tool in use',h:'You need a verified email and phone source before sequences run',w:'Critical'},
+    {t:'LinkedIn Sales Navigator or equivalent for signal monitoring',h:'Free LinkedIn limits search severely — Sales Nav or an equivalent is needed for scale',w:'Standard'},
+    {t:'Company database for firmographic filtering (e.g. Crunchbase, BuiltWith)',h:'Funding, tech stack, and growth data helps verify Filter 1 signals',w:'Standard'},
+    {t:'Data enrichment tool connected to CRM (e.g. Clearbit, Lusha)',h:'Enrichment keeps CRM properties current without manual updates',w:'Optional'},
+  ],
+  signals:[
+    {t:'A process exists to identify accounts where the problem is active right now',h:'Not just ICP fit — active evidence the problem exists today',w:'Critical'},
+    {t:'Job posting monitoring in place for target roles (SDR Manager, RevOps, Head of Sales)',h:'Active hiring is one of the strongest Filter 1 signals',w:'Critical'},
+    {t:'LinkedIn activity monitoring for target decision-makers',h:'Posts about pipeline, outbound, or SDR challenges are high-quality signals',w:'Standard'},
+    {t:'Funding announcement monitoring in place (e.g. Crunchbase alerts)',h:'Series A/B raises with GTM objectives are strong trigger signals',w:'Standard'},
+    {t:'News and leadership change monitoring for target accounts',h:'New VP Sales or CRO is one of the strongest signals of active buying intent',w:'Standard'},
+  ],
+  list:[
+    {t:'Master account list exists — all target accounts in one place',h:'No master list means no visibility into overlap, re-entry, or coverage',w:'Critical'},
+    {t:'Accounts are tagged with the signal that triggered their addition',h:'Without this, you cannot measure Filter 1 compliance',w:'Critical'},
+    {t:'Removed accounts are flagged with a removal reason',h:'Required for Account Re-Entry Rate tracking — Signal 01',w:'Critical'},
+    {t:'List is reviewed and refreshed at least monthly',h:'Stale accounts contaminate the pipeline composition score',w:'Standard'},
+  ]
+};
+
+const TECH={
+  core:[
+    {t:'CRM in place (HubSpot, Salesforce, or equivalent)',h:'All contact and account data must live in one place',w:'Critical'},
+    {t:'Sequence tool configured (HubSpot Sequences, Outreach, Salesloft, or Apollo)',h:'Sequences must be trackable — step completion, abandonment rate, response data',w:'Critical'},
+    {t:'Email sending domain is warmed and authenticated (SPF, DKIM, DMARC)',h:'Without authentication, emails go to spam — your sequence data is meaningless',w:'Critical'},
+    {t:'Calendar tool connected for meeting booking (Calendly, HubSpot Meetings)',h:'Meetings must be logged automatically in CRM for Signal 04 tracking',w:'Standard'},
+  ],
+  config:[
+    {t:'SDR Operating System custom property group created in HubSpot',h:'The four signal properties need a dedicated group — see the HubSpot Integration Guide',w:'Critical'},
+    {t:'Account Re-Entry Rate property created and connected to a workflow alert',h:'Signal 01 — must fire when above 15%',w:'Critical'},
+    {t:'Sequence Abandonment Rate property created and connected to workflow alert',h:'Signal 02 — must fire when above 20%',w:'Critical'},
+    {t:'Pipeline Composition Score property created and connected to workflow alert',h:'Signal 03 — must fire when below 70%',w:'Critical'},
+    {t:'Meeting-to-Opportunity Rate property created on deal record',h:'Signal 04 — must fire when below 40% over 4-week rolling average',w:'Critical'},
+    {t:'SDR OS Signals dashboard created in HubSpot Reports',h:'All four signals visible in one view — reviewed Monday and Friday',w:'Standard'},
+  ],
+  data:[
+    {t:'Sequence completion rate is trackable — can you see which step each contact is on?',h:'Required for Sequence Abandonment Rate calculation',w:'Critical'},
+    {t:'Meeting-to-opportunity conversion is trackable in the deal pipeline',h:'Required for Signal 04 — the 4-week rolling average',w:'Critical'},
+    {t:'Contact removal reasons are logged as a CRM property',h:'Required for Account Re-Entry Rate calculation',w:'Standard'},
+    {t:'Pipeline composition can be calculated — filter by both input filter properties',h:'Required for Signal 03 — the 70% threshold check',w:'Standard'},
+  ]
+};
+
+const ONBOARDING={
+  knowledge:[
+    {t:'Rep can explain the two input filters in their own words',h:'They must be able to articulate why an account does or does not qualify',w:'Critical'},
+    {t:'Rep has read the written execution standard and can describe all sequence steps',h:'No rep starts sequencing without knowing the standard they are scored against',w:'Critical'},
+    {t:'Rep understands the four signal thresholds and what each one means',h:'They should know what fires Monday AM, Tuesday AM, and Friday AM',w:'Critical'},
+    {t:'Rep understands the re-entry rule — what happens to removed accounts',h:'Most re-entry problems start with reps who do not know the rule exists',w:'Critical'},
+    {t:'Rep has completed the ICP test — can identify qualifying vs non-qualifying accounts',h:'A short 10-question test using real accounts from the target list',w:'Standard'},
+  ],
+  access:[
+    {t:'CRM login created and profile set up',h:'',w:'Critical'},
+    {t:'Sequence tool access granted — can enroll and manage contacts',h:'',w:'Critical'},
+    {t:'HubSpot SDR OS signal properties visible on their contact view',h:'They should be able to see the four signal properties on every account',w:'Standard'},
+    {t:'Apollo or data tool access granted',h:'',w:'Standard'},
+    {t:'Calendar tool connected and meeting booking link set up',h:'',w:'Standard'},
+    {t:'LinkedIn Sales Navigator seat assigned (if applicable)',h:'',w:'Optional'},
+  ],
+  week1:[
+    {t:'First 10 accounts sourced, both filters verified, and added to CRM',h:'Their first accounts must go through the filter process — no shortcuts',w:'Critical'},
+    {t:'First sequence enrolled — minimum 3 accounts in active sequence by end of week',h:'Learning by doing — supervised, with manager review after first send',w:'Critical'},
+    {t:'First Execution Scorecard completed by manager',h:'Sets the baseline before habits form',w:'Critical'},
+    {t:'Attended one Monday pipeline composition review',h:'They must see the diagnostic cadence in action before running it themselves',w:'Standard'},
+    {t:'Shadow call completed — listened to or participated in one live outbound call',h:'',w:'Standard'},
+  ],
+  day30:[
+    {t:'Running their own accounts through both input filters independently',h:'No manager intervention needed for standard account qualification',w:'Critical'},
+    {t:'Sequence abandonment rate below 20% — completing sequences to step 4',h:'',w:'Critical'},
+    {t:'Week 4 Execution Scorecard score at or above 65%',h:'Below 65% at week 4 means the standard needs adjustment, not just more coaching',w:'Critical'},
+    {t:'Attending and contributing to the Monday diagnostic review',h:'',w:'Standard'},
+    {t:'First meeting booked — and qualification recorded in CRM at point of booking',h:'The qualification record at booking is the proof the process was followed',w:'Standard'},
+  ]
+};
+
+// ── RENDER CHECKLISTS ──
+const sourcing_state={data:{},signals:{},list:{}};
+const tech_state={core:{},config:{},data:{}};
+const onboard_state={knowledge:{},access:{},week1:{},day30:{}};
+
+function renderChecklist(containerId,items,stateObj,groupKey,updateFn){
+  const el=document.getElementById(containerId);
+  el.innerHTML=items.map((item,i)=>`
+    <div class="check-item">
+      <div class="check-box" id="cb-${groupKey}-${i}" onclick="${updateFn}('${groupKey}',${i},'toggle')"></div>
+      <div class="check-label">
+        <div class="check-text">${item.t}</div>
+        ${item.h?`<div class="check-hint">${item.h}</div>`:''}
+      </div>
+      <span class="check-badge">${item.w}</span>
+      ${item.w==='Optional'?`<button class="check-skip" id="skip-${groupKey}-${i}" onclick="${updateFn}('${groupKey}',${i},'skip')">N/A</button>`:''}
+    </div>`).join('');
+}
+
+function toggleSourcing(group,i,action){
+  const key=group+'-'+i;
+  if(action==='skip'){
+    sourcing_state[group][i]=sourcing_state[group][i]==='na'?null:'na';
+  } else {
+    sourcing_state[group][i]=sourcing_state[group][i]===true?null:true;
+  }
+  const cb=document.getElementById('cb-'+group+'-'+i);
+  const skip=document.getElementById('skip-'+group+'-'+i);
+  const v=sourcing_state[group][i];
+  cb.className='check-box'+(v===true?' on':v==='na'?' na':'');
+  if(skip) skip.className='check-skip'+(v==='na'?' on':'');
+  updateSourcingScore(group);
+}
+
+function updateSourcingScore(group){
+  const items=SOURCING[group];
+  const done=Object.values(sourcing_state[group]).filter(v=>v===true).length;
+  const skipped=Object.values(sourcing_state[group]).filter(v=>v==='na').length;
+  const total=items.length-skipped;
+  const pct=total>0?Math.round(done/total*100):0;
+  const col=pct>=80?'var(--green)':pct>=60?'#10B981':pct>=40?'var(--amber)':'var(--red)';
+  document.getElementById('sf-'+group).style.width=pct+'%';
+  document.getElementById('sf-'+group).style.background=col;
+  document.getElementById('sv-'+group).textContent=done+'/'+total;
+  document.getElementById('sv-'+group).style.color=col;
+  updateSourcingStatus();
+}
+
+function updateSourcingStatus(){
+  const groups=['data','signals','list'];
+  const scores=groups.map(g=>{
+    const items=SOURCING[g];
+    const done=Object.values(sourcing_state[g]).filter(v=>v===true).length;
+    const skipped=Object.values(sourcing_state[g]).filter(v=>v==='na').length;
+    const total=items.length-skipped;
+    return total>0?Math.round(done/total*100):null;
+  });
+  const rated=scores.filter(s=>s!==null);
+  if(!rated.length)return;
+  const overall=Math.round(rated.reduce((a,b)=>a+b,0)/rated.length);
+  const col=overall>=80?'var(--green)':overall>=60?'#10B981':overall>=40?'var(--amber)':'var(--red)';
+  document.getElementById('sourcing-score').textContent=overall;
+  document.getElementById('sourcing-score').style.color=col;
+  const sc=document.getElementById('sourcing-status');
+  const h=document.getElementById('sourcing-headline');
+  const d=document.getElementById('sourcing-desc');
+  if(overall>=80){sc.className='status-card ready';h.textContent='Account sourcing infrastructure is ready';d.innerHTML='Data sources, signal monitoring, and list management are all in place. <strong>Input Control can run reliably on this foundation.</strong>';}
+  else if(overall>=60){sc.className='status-card partial';h.textContent='Partial readiness — gaps in sourcing infrastructure';d.innerHTML='Some sourcing components are missing. <strong>Address the Critical items before running Input Control at scale.</strong>';}
+  else{sc.className='status-card notready';h.textContent='Not ready — sourcing infrastructure needs work';d.innerHTML='<strong>Significant gaps in data sources or signal monitoring.</strong> Input Control will produce inconsistent results without fixing these first.';}
+}
+
+function toggleTech(group,i,action){
+  // Tech uses 0/1/2 rating not checkbox
+}
+function rateTech(group,i,val){
+  tech_state[group][i]=tech_state[group][i]===val?null:val;
+  [0,1,2].forEach(v=>{
+    const btn=document.getElementById('tb-'+group+'-'+i+'-'+v);
+    if(btn)btn.className='ab'+(tech_state[group][i]===v?' r'+v:'');
+  });
+  updateTechScore(group);
+}
+
+function updateTechScore(group){
+  const items=TECH[group];
+  const rated=Object.values(tech_state[group]).filter(v=>v!==null);
+  if(!rated.length){
+    document.getElementById('tf-'+group).style.width='0%';
+    document.getElementById('tv-'+group).textContent='—';
+    return;
+  }
+  const sum=rated.reduce((a,b)=>a+b,0);
+  const pct=Math.round(sum/(rated.length*2)*100);
+  const col=pct>=80?'var(--green)':pct>=60?'#10B981':pct>=40?'var(--amber)':'var(--red)';
+  document.getElementById('tf-'+group).style.width=pct+'%';
+  document.getElementById('tf-'+group).style.background=col;
+  document.getElementById('tv-'+group).textContent=pct+'%';
+  document.getElementById('tv-'+group).style.color=col;
+  updateTechStatus();
+}
+
+function updateTechStatus(){
+  const groups=['core','config','data'];
+  const scores=groups.map(g=>{
+    const rated=Object.values(tech_state[g]).filter(v=>v!==null);
+    if(!rated.length)return null;
+    return Math.round(rated.reduce((a,b)=>a+b,0)/(rated.length*2)*100);
+  });
+  const rated=scores.filter(s=>s!==null);
+  if(!rated.length)return;
+  const overall=Math.round(rated.reduce((a,b)=>a+b,0)/rated.length);
+  const col=overall>=80?'var(--green)':overall>=60?'#10B981':overall>=40?'var(--amber)':'var(--red)';
+  document.getElementById('tech-score').textContent=overall;
+  document.getElementById('tech-score').style.color=col;
+  document.getElementById('tech-breakdown').innerHTML=groups.map((g,i)=>{
+    const s=scores[i];
+    const label=['Core stack','HubSpot config','Data visibility'][i];
+    return`<div class="sg-item"><div class="sg-name">${label}</div><div class="sg-bar-row"><div class="sg-bar"><div class="sg-fill" style="width:${s||0}%;background:${s===null?'var(--border)':col}"></div></div><span class="sg-val" style="color:${s===null?'var(--muted)':col}">${s===null?'—':s+'%'}</span></div></div>`;
+  }).join('');
+  const sc=document.getElementById('tech-status'), h=document.getElementById('tech-headline'), d=document.getElementById('tech-desc');
+  if(overall>=80){sc.className='status-card ready';h.textContent='Tech stack is ready — system can run';d.innerHTML='Core tools in place and configured. <strong>The four pillars can run on this stack.</strong>';}
+  else if(overall>=60){sc.className='status-card partial';h.textContent='Partial readiness — configuration gaps';d.innerHTML='Stack is partially ready. <strong>Complete the Critical configuration items before running Pillar 4 signal workflows.</strong>';}
+  else{sc.className='status-card notready';h.textContent='Not ready — significant stack gaps';d.innerHTML='<strong>Core tools or critical configuration are missing.</strong> The signals cannot run reliably without fixing these first. See the HubSpot Integration Guide.';}
+}
+
+function renderTechChecklist(containerId,items,group){
+  const el=document.getElementById(containerId);
+  el.innerHTML=items.map((item,i)=>`
+    <div class="check-item">
+      <div class="assess-btns">
+        <button class="ab" id="tb-${group}-${i}-0" onclick="rateTech('${group}',${i},0)" title="Not in place">0</button>
+        <button class="ab" id="tb-${group}-${i}-1" onclick="rateTech('${group}',${i},1)" title="Partial">1</button>
+        <button class="ab" id="tb-${group}-${i}-2" onclick="rateTech('${group}',${i},2)" title="Ready">2</button>
+      </div>
+      <div class="check-label">
+        <div class="check-text">${item.t}</div>
+        ${item.h?`<div class="check-hint">${item.h}</div>`:''}
+      </div>
+      <span class="check-badge">${item.w}</span>
+    </div>`).join('');
+}
+
+function toggleOnboard(group,i,action){
+  onboard_state[group][i]=onboard_state[group][i]===true?null:true;
+  const cb=document.getElementById('ob-'+group+'-'+i);
+  cb.className='check-box'+(onboard_state[group][i]?' on':'');
+  updateOnboardScore(group);
+}
+
+function updateOnboardScore(group){
+  const items=ONBOARDING[group];
+  const done=Object.values(onboard_state[group]).filter(v=>v===true).length;
+  const pct=Math.round(done/items.length*100);
+  const col=pct>=80?'var(--green)':pct>=60?'#10B981':pct>=40?'var(--amber)':'var(--red)';
+  document.getElementById('of-'+group).style.width=pct+'%';
+  document.getElementById('of-'+group).style.background=col;
+  document.getElementById('ov-'+group).textContent=done+'/'+items.length;
+  document.getElementById('ov-'+group).style.color=col;
+  updateOnboardStatus();
+}
+
+function updateOnboardStatus(){
+  const groups=['knowledge','access','week1','day30'];
+  const scores=groups.map(g=>{
+    const items=ONBOARDING[g];
+    const done=Object.values(onboard_state[g]).filter(v=>v===true).length;
+    return Math.round(done/items.length*100);
+  });
+  const overall=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+  const col=overall>=80?'var(--green)':overall>=60?'#10B981':overall>=40?'var(--amber)':'var(--red)';
+  document.getElementById('onboard-score').textContent=overall;
+  document.getElementById('onboard-score').style.color=col;
+  const repName=document.getElementById('rep-name')?.value?.trim()||'This rep';
+  const sc=document.getElementById('onboard-status'), h=document.getElementById('onboard-headline'), d=document.getElementById('onboard-desc');
+  if(overall>=80){sc.className='status-card ready';h.textContent=repName+' is ready to run independently';d.innerHTML='All critical onboarding items are complete. <strong>This rep can sequence accounts and is ready for week two.</strong>';}
+  else if(overall>=60){sc.className='status-card partial';h.textContent=repName+' is partially onboarded';d.innerHTML='Most items are in place. <strong>Complete the Critical items before clearing this rep to sequence independently.</strong>';}
+  else{sc.className='status-card notready';h.textContent=repName+' is not ready to sequence';d.innerHTML='<strong>Critical onboarding items are incomplete.</strong> This rep should not be sequencing accounts yet. Complete the Knowledge and Access sections first.';}
+}
+
+function renderOnboardChecklist(containerId,items,group){
+  const el=document.getElementById(containerId);
+  el.innerHTML=items.map((item,i)=>`
+    <div class="check-item">
+      <div class="check-box" id="ob-${group}-${i}" onclick="toggleOnboard('${group}',${i})"></div>
+      <div class="check-label">
+        <div class="check-text">${item.t}</div>
+        ${item.h?`<div class="check-hint">${item.h}</div>`:''}
+      </div>
+      <span class="check-badge">${item.w}</span>
+    </div>`).join('');
+}
+
+function updateRepName(){
+  updateOnboardStatus();
+}
+
+function copyOnboarding(){
+  const name=document.getElementById('rep-name')?.value?.trim()||'New Rep';
+  const start=document.getElementById('rep-start')?.value||'';
+  let txt='SDR ONBOARDING CHECKLIST\n';
+  txt+='Rep: '+name+(start?' | Start: '+start:'')+'\n';
+  txt+='==========================================\n\n';
+  const groups=['knowledge','access','week1','day30'];
+  const labels=['SYSTEM KNOWLEDGE','SYSTEM ACCESS','WEEK 1 MILESTONES','30-DAY MILESTONES'];
+  groups.forEach((g,gi)=>{
+    txt+=labels[gi]+'\n';
+    ONBOARDING[g].forEach((item,i)=>{
+      const done=onboard_state[g][i]===true;
+      txt+='  '+(done?'✓':'☐')+' '+item.t+'\n';
+    });
+    txt+='\n';
+  });
+  txt+='The SDR Operating System · Wilberforce Moyo · Reducing Variance. Increasing Predictability.';
+  navigator.clipboard.writeText(txt).then(()=>alert('Onboarding checklist copied.')).catch(()=>alert('Copy failed.'));
+}
+
+// ── INIT ──
+function init(){
+  renderChecklist('sourcing-data',SOURCING.data,sourcing_state,'data','toggleSourcing');
+  renderChecklist('sourcing-signals',SOURCING.signals,sourcing_state,'signals','toggleSourcing');
+  renderChecklist('sourcing-list',SOURCING.list,sourcing_state,'list','toggleSourcing');
+  renderTechChecklist('tech-core',TECH.core,'core');
+  renderTechChecklist('tech-config',TECH.config,'config');
+  renderTechChecklist('tech-data',TECH.data,'data');
+  renderOnboardChecklist('onboard-knowledge',ONBOARDING.knowledge,'knowledge');
+  renderOnboardChecklist('onboard-access',ONBOARDING.access,'access');
+  renderOnboardChecklist('onboard-week1',ONBOARDING.week1,'week1');
+  renderOnboardChecklist('onboard-30day',ONBOARDING.day30,'day30');
+}
+init();
+</script>
+</body>
+</html>
