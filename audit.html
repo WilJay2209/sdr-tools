@@ -258,10 +258,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   <h1>How healthy is your<br><span>outbound operation?</span></h1>
   <p class="header-sub">Score all four pillars. See the financial cost of variance. Get a detailed report for your leadership team.</p>
   <div class="header-pills">
-    <span class="header-pill" style="background:rgba(59,130,246,0.25)">01 Input Control</span>
-    <span class="header-pill" style="background:rgba(16,185,129,0.25)">02 Execution Standard</span>
-    <span class="header-pill" style="background:rgba(139,92,246,0.25)">03 Operating Rhythm</span>
-    <span class="header-pill" style="background:rgba(245,158,11,0.25)">04 Signal Management</span>
+    <span class="header-pill" style="background:rgba(59,130,246,0.25)">02 Input Control</span>
+    <span class="header-pill" style="background:rgba(16,185,129,0.25)">03 Execution Standard</span>
+    <span class="header-pill" style="background:rgba(139,92,246,0.25)">04 Operating Rhythm</span>
+    <span class="header-pill" style="background:rgba(245,158,11,0.25)">05 Signal Management</span>
   </div>
 </div>
 
@@ -509,7 +509,7 @@ function init(){
     return `
       <div class="pillar-card" id="pc-${pi}">
         <div class="pillar-head" onclick="togglePillar(${pi})">
-          <div class="pillar-num" id="pn-${pi}">0${pi+1}</div>
+          <div class="pillar-num" id="pn-${pi}">0${pi+2}</div>
           <div class="pillar-info">
             <div class="pillar-name">${p.name} <span class="free-badge">Free</span></div>
             <div class="pillar-q">${['What enters the workflow — does it meet both filters?','Does every rep run the same standard — every time?','Is there a weekly diagnostic cadence — not just a meeting?','Does the system catch problems before they hit the forecast?'][pi]}</div>
@@ -640,7 +640,7 @@ function updateMaster(){
 
   document.getElementById('pillar-bars').innerHTML=PILLARS.map((p,pi)=>{
     const s=scores[pi];
-    return`<div class="pb-item"><div class="pb-top"><span class="pb-name">Pillar ${pi+1}: ${p.name}</span><span class="pb-val" style="color:${scCol(s)}">${s===null?'—':s+'%'}</span></div><div class="pb-bar"><div class="pb-fill" style="width:${s||0}%;background:${scCol(s)}"></div></div></div>`;
+    return`<div class="pb-item"><div class="pb-top"><span class="pb-name">Pillar ${pi+2}: ${p.name}</span><span class="pb-val" style="color:${scCol(s)}">${s===null?'—':s+'%'}</span></div><div class="pb-bar"><div class="pb-fill" style="width:${s||0}%;background:${scCol(s)}"></div></div></div>`;
   }).join('');
 
   const rated=scores.filter(s=>s!==null);
@@ -670,7 +670,7 @@ function updateMaster(){
   if(scored.length){
     const w=scored[0]; const wb=document.getElementById('weak-box'); wb.className='weak-box show';
     wb.style.borderColor=scCol(w.s);
-    document.getElementById('wpb-name').textContent=`Pillar ${w.i+1}: ${PILLARS[w.i].name} — ${w.s}%`;
+    document.getElementById('wpb-name').textContent=`Pillar ${w.i+2}: ${PILLARS[w.i].name} — ${w.s}%`;
     document.getElementById('wpb-name').style.color=scCol(w.s);
     document.getElementById('wpb-fix').textContent=PILLARS[w.i].fix;
   }
