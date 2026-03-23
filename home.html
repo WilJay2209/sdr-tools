@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The SDR Operating System · Reducing Variance. Increasing Predictability.</title>
+<meta name="description" content="The SDR Operating System installs a five-part outbound engine for early-stage B2B SaaS teams. Reducing Variance. Increasing Predictability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F1F3D;
+    --navy-mid: #1a3260;
+    --teal: #4FC3A1;
+    --teal-dark: #0D9488;
+    --bg: #F8FAFC;
+    --white: #ffffff;
+    --text: #374151;
+    --muted: #64748B;
+    --light-blue: #7FA8C9;
+    --border: #E2E8F0;
+    --green: #22C55E;
+    --teal2: #14B8A6;
+    --blue: #3B82F6;
+    --amber: #F59E0B;
+    --purple: #8B5CF6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes slideRight {
+    from { transform: scaleX(0); } to { transform: scaleX(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--navy);
+    padding: 0 48px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .nav-logo-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--white);
+    letter-spacing: 0.3px;
+    line-height: 1;
+  }
+
+  .nav-logo-tag {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--light-blue);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--teal) !important;
+    color: var(--navy) !important;
+    padding: 10px 20px !important;
+    border-radius: 3px !important;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: #38b393 !important; }
+
+  .nav-mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-mobile-toggle span {
+    width: 24px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    background: var(--navy);
+    padding: 160px 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(79,195,161,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -50px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(127,168,201,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 24px;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--teal);
+  }
+
+  .hero-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 54px);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero-headline span {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-blue);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #38b393; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--teal);
+    background: rgba(79,195,161,0.06);
+  }
+
+  .hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.4s both;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(127,168,201,0.8);
+  }
+
+  .proof-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 96px 48px; }
+
+  .section-inner { max-width: 900px; margin: 0 auto; }
+
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--teal-dark);
+    margin-bottom: 16px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--teal);
+  }
+
+  .section-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 16px;
+  }
+
+  /* ── PROBLEM ── */
+  #problem { background: var(--white); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .problem-card {
+    background: var(--bg);
+    border-radius: 3px;
+    padding: 28px;
+    border-left: 3px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .problem-card:hover { border-color: var(--teal); }
+
+  .problem-card p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .problem-closing {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--navy);
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  .problem-closing span { color: var(--teal); }
+
+  /* ── SYSTEM ── */
+  #system { background: var(--bg); }
+
+  .system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .pillar-accent { height: 4px; width: 100%; }
+  .p1 .pillar-accent { background: var(--green); }
+  .p2 .pillar-accent { background: var(--teal2); }
+  .p3 .pillar-accent { background: var(--blue); }
+  .p4 .pillar-accent { background: var(--amber); }
+
+  .pillar-body { padding: 28px; }
+
+  .pillar-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  .p1 .tag { background: rgba(34,197,94,0.1); color: #15803d; }
+  .p2 .tag { background: rgba(20,184,166,0.1); color: #0f766e; }
+  .p3 .tag { background: rgba(59,130,246,0.1); color: #1d4ed8; }
+  .p4 .tag { background: rgba(245,158,11,0.1); color: #b45309; }
+
+  /* Signal Tower — full width */
+  .pillar-card-wide {
+    grid-column: 1 / -1;
+    background: var(--navy);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+
+  .pillar-card-wide:hover { transform: translateY(-2px); }
+
+  .p5-accent { height: 4px; background: var(--purple); }
+
+  .p5-inner {
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .p5-left .pillar-name { color: var(--white); font-size: 24px; }
+  .p5-left .pillar-desc { color: var(--light-blue); }
+
+  .p5-signals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .signal-item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .signal-item p {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .signal-item span {
+    font-size: 10px;
+    color: var(--purple);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .service-card {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+
+  .service-header {
+    background: var(--navy);
+    padding: 28px 32px;
+  }
+
+  .service-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .service-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .service-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--light-blue);
+  }
+
+  .service-body {
+    padding: 28px 32px;
+    background: var(--bg);
+    flex: 1;
+  }
+
+  .service-for {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .service-list li {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .service-list li::before {
+    content: '✓';
+    color: var(--teal-dark);
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .service-outcome {
+    background: rgba(79,195,161,0.08);
+    border-left: 3px solid var(--teal);
+    padding: 14px 16px;
+    border-radius: 0 3px 3px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .service-card .btn-primary {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+
+  /* ── TOOLS ── */
+  #tools { background: var(--bg); }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .tool-card {
+    background: var(--white);
+    border-radius: 3px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+    border-top: 3px solid var(--border);
+  }
+
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .tool-card.t1 { border-color: var(--green); }
+  .tool-card.t2 { border-color: var(--teal2); }
+  .tool-card.t3 { border-color: var(--blue); }
+  .tool-card.t4 { border-color: var(--amber); }
+  .tool-card.t5 { border-color: var(--purple); }
+  .tool-card.t6 { border-color: var(--navy); }
+
+  .tool-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .tool-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .tool-link {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal-dark);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── QUOTE ── */
+  #quote {
+    background: var(--navy);
+    padding: 80px 48px;
+  }
+
+  .quote-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quote-mark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 80px;
+    color: var(--teal);
+    line-height: 0.5;
+    margin-bottom: 24px;
+    opacity: 0.5;
+  }
+
+  .quote-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .quote-attr {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    margin-top: 48px;
+  }
+
+  .about-creds {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .cred-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--bg);
+    border-radius: 3px;
+    border-left: 3px solid var(--teal);
+  }
+
+  .cred-item p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .cred-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .about-right {
+    background: var(--navy);
+    border-radius: 3px;
+    padding: 36px;
+  }
+
+  .about-right h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .about-right p {
+    font-size: 13px;
+    color: var(--light-blue);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .dm-trigger {
+    background: rgba(79,195,161,0.1);
+    border: 1px solid rgba(79,195,161,0.3);
+    border-radius: 3px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* ── BOOK ── */
+  #book {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3260 100%);
+    padding: 80px 48px;
+  }
+
+  .book-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .book-badge {
+    display: inline-block;
+    background: rgba(79,195,161,0.15);
+    border: 1px solid rgba(79,195,161,0.3);
+    color: var(--teal);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .book-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .book-sub {
+    font-size: 14px;
+    color: var(--light-blue);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .book-visual {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 36px;
+    text-align: center;
+  }
+
+  .book-visual-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .book-visual-sub {
+    font-size: 12px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .book-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .chapter-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--light-blue);
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px;
+  }
+
+  .chapter-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--teal);
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER CTA ── */
+  #footer-cta {
+    background: var(--bg);
+    padding: 96px 48px;
+    text-align: center;
+  }
+
+  #footer-cta .section-headline { text-align: center; margin: 0 auto 16px; }
+  #footer-cta .section-body { margin: 0 auto 36px; text-align: center; }
+
+  .cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-left {}
+
+  .footer-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--light-blue);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(127,168,201,0.5);
+    width: 100%;
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: flex; }
+
+    section { padding: 64px 24px; }
+    #hero { padding: 120px 24px 80px; }
+
+    .problem-grid,
+    .system-grid,
+    .services-grid,
+    .about-grid,
+    .book-inner { grid-template-columns: 1fr; }
+
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+
+    .p5-inner { grid-template-columns: 1fr; }
+
+    footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+
+    #quote { padding: 64px 24px; }
+    #book { padding: 64px 24px; }
+    #footer-cta { padding: 64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-name">The SDR Operating System</span>
+    <span class="nav-logo-tag">Reducing Variance. Increasing Predictability.</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#system">The System</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#tools">Free Tools</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#book">The Book</a></li>
+    <li><a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html" class="nav-cta">Get Free Audit</a></li>
+  </ul>
+  <div class="nav-mobile-toggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">For Early-Stage B2B SaaS Teams · Seed to Series B</div>
+    <h1 class="hero-headline">Your Outbound Team Shouldn't Stall Every Time a <span>Rep Leaves.</span></h1>
+    <p class="hero-sub">The SDR Operating System installs a five-part outbound engine that runs independently of individual performance — so your pipeline stays predictable no matter who's in the seat.</p>
+    <div class="hero-ctas">
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html" class="btn-primary">Get Your Free SDR Audit</a>
+      <a href="#system" class="btn-secondary">See How the System Works</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item"><span class="proof-dot"></span>18 Years SDR Operations</div>
+      <div class="proof-item"><span class="proof-dot"></span>US · UK · South Africa</div>
+      <div class="proof-item"><span class="proof-dot"></span>ABM Certified</div>
+      <div class="proof-item"><span class="proof-dot"></span>HubSpot Configured</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ── -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Why Most Outbound Teams Stay Fragile</div>
+      <h2 class="section-headline">Individual Performance Is Not a System.</h2>
+      <p class="section-body">Most early-stage B2B SaaS teams build their outbound motion around people — not process. The result is a motion that looks like it's working until a rep leaves, a manager changes, or a quarter goes sideways.</p>
+    </div>
+    <div class="problem-grid reveal">
+      <div class="problem-card"><p>Your best rep carries 60% of the meetings. When they leave, pipeline collapses.</p></div>
+      <div class="problem-card"><p>There's no consistent standard for who gets worked, how sequences run, or what qualifies as a real opportunity.</p></div>
+      <div class="problem-card"><p>Your CRM is a graveyard of stale data and ad-hoc decisions made by whoever was in the seat last.</p></div>
+      <div class="problem-card"><p>You're managing output — not diagnosing variance. You see the result but never the root cause.</p></div>
+    </div>
+    <div class="problem-closing reveal">
+      The motion feels fragile because it is. <span>The SDR Operating System was built to fix that.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SYSTEM ── -->
+<section id="system">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">The SDR Operating System</div>
+      <h2 class="section-headline">Five Roles. One System. Zero Reliance on Individual Performance.</h2>
+      <p class="section-body">Each part plays a specific role — together they make your motion predictable, scalable, and independent of who's in the seat.</p>
+    </div>
+    <div class="system-grid">
+
+      <div class="pillar-card p1 reveal">
+        <div class="pillar-accent"></div>
+        <div class="pillar-body">
+          <div class="pillar-name">The Targeting Engine</div>
+          <p class="pillar-desc">Defines exactly who you go after, how you source them, and how every new rep gets productive fast — before a single sequence is touched.</p>
+          <div class="pillar-tags">
+            <span class="tag">ICP Definition</span>
+            <span class="tag">ABM Layer</span>
+            <span class="tag">Tech Stack</span>
+            <span class="tag">Rep Onboarding</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card p2 reveal">
+        <div class="pillar-accent"></div>
+        <div class="pillar-body">
+          <div class="pillar-name">The Gatekeeper</div>
+          <p class="pillar-desc">Stops bad-fit accounts from ever entering the motion. Every account that reaches a rep has already passed two filters — problem likelihood and role accessibility.</p>
+          <div class="pillar-tags">
+            <span class="tag">Problem Likelihood</span>
+            <span class="tag">Role Accessibility</span>
+            <span class="tag">Account Quality Gate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card p3 reveal">
+        <div class="pillar-accent"></div>
+        <div class="pillar-body">
+          <div class="pillar-name">The Consistency Layer</div>
+          <p class="pillar-desc">Removes the guesswork from daily rep behaviour. Every sequence, every qualification call, every CRM entry runs to the same standard — regardless of who's in the seat.</p>
+          <div class="pillar-tags">
+            <span class="tag">Sequence Adherence</span>
+            <span class="tag">Qualification</span>
+            <span class="tag">CRM Discipline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card p4 reveal">
+        <div class="pillar-accent"></div>
+        <div class="pillar-body">
+          <div class="pillar-name">The Diagnostic Cadence</div>
+          <p class="pillar-desc">A five-day operating rhythm that tells you exactly what is working, what is breaking, and where to intervene — before small problems become pipeline problems.</p>
+          <div class="pillar-tags">
+            <span class="tag">Mon Intent Set</span>
+            <span class="tag">Wed Diagnostic</span>
+            <span class="tag">Fri Signal Review</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card-wide reveal">
+        <div class="p5-accent"></div>
+        <div class="p5-inner">
+          <div class="p5-left">
+            <div class="pillar-name">The Signal Tower</div>
+            <p class="pillar-desc">Four signals that give you a command-level view of your entire outbound motion in real time — so you see variance forming before it compounds into missed quota.</p>
+          </div>
+          <div class="p5-signals">
+            <div class="signal-item"><p>Re-Entry Rate</p><span>Signal 01</span></div>
+            <div class="signal-item"><p>Abandonment Rate</p><span>Signal 02</span></div>
+            <div class="signal-item"><p>Composition Score</p><span>Signal 03</span></div>
+            <div class="signal-item"><p>Meeting-to-Opp Rate</p><span>Signal 04</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section id="quote">
+  <div class="quote-inner reveal">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">Most teams still rely on individual performance, manual oversight, and a patchwork tech stack — which makes the entire motion fragile. Each time a rep leaves, momentum stalls. The SDR Operating System was built to fix that.</p>
+    <div class="quote-attr">— Wilberforce Moyo · Outbound Systems Engineer</div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Two Ways to Work Together</div>
+      <h2 class="section-headline">Pick the Right Engagement for Where You Are.</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-header">
+          <div class="service-label">Engagement 01</div>
+          <div class="service-name">SDR OS Audit</div>
+          <div class="service-price">$4,500 – $12,000</div>
+        </div>
+        <div class="service-body">
+          <p class="service-for">You already have an SDR team but results are inconsistent and you can't diagnose why.</p>
+          <ul class="service-list">
+            <li>Full diagnostic across all five parts of the system</li>
+            <li>Variance mapped and root cause identified</li>
+            <li>Fix plan with prioritised actions</li>
+            <li>HubSpot audit included</li>
+            <li>Three downloadable resources on completion</li>
+          </ul>
+          <div class="service-outcome">You leave knowing exactly where your motion is breaking and what to fix first.</div>
+          <a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html" class="btn-primary">Start With the Free Audit →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-header">
+          <div class="service-label">Engagement 02</div>
+          <div class="service-name">SDR OS Installation</div>
+          <div class="service-price">$15,000 – $35,000</div>
+        </div>
+        <div class="service-body">
+          <p class="service-for">You're building your SDR function from scratch or rebuilding after a reset and need a full operating model installed.</p>
+          <ul class="service-list">
+            <li>Full five-part system installed over eight weeks</li>
+            <li>HubSpot fully configured to the operating model</li>
+            <li>Rep onboarding standard built and documented</li>
+            <li>ABM layer integrated from day one</li>
+            <li>Week 12 review included</li>
+          </ul>
+          <div class="service-outcome">You end the engagement with a running, self-diagnosing outbound system — not a set of slides.</div>
+          <a href="https://www.linkedin.com/in/wilberforcemoyo" class="btn-primary">Book an Installation Call →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TOOLS ── -->
+<section id="tools">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Free SDR OS Tools</div>
+      <h2 class="section-headline">Six Tools. Five Parts. Yours Free.</h2>
+      <p class="section-body">Every tool in the SDR OS suite is available free — no login required for most. Built to give your team a live feel for what a running operating system looks like before you commit to an engagement.</p>
+    </div>
+    <div class="tools-grid">
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/pillar-zero.html" class="tool-card t1 reveal">
+        <div class="tool-name">Foundation Builder</div>
+        <p class="tool-desc">Build your ICP definition and ABM account sourcing layer from scratch.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/input-control.html" class="tool-card t2 reveal">
+        <div class="tool-name">Input Control Filter</div>
+        <p class="tool-desc">Score accounts against problem likelihood and role accessibility before they reach a rep.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/execution-scorecard.html" class="tool-card t3 reveal">
+        <div class="tool-name">Execution Scorecard</div>
+        <p class="tool-desc">Measure rep consistency across sequences, CRM entries, and qualification calls.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/rhythm-planner.html" class="tool-card t4 reveal">
+        <div class="tool-name">Rhythm Planner</div>
+        <p class="tool-desc">Run the five-day diagnostic cadence and track your team's operating rhythm.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/index.html" class="tool-card t5 reveal">
+        <div class="tool-name">Signal Dashboard</div>
+        <p class="tool-desc">Track all four outbound signals in real time — your command-level view of the motion.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html" class="tool-card t6 reveal">
+        <div class="tool-name">Full SDR Audit</div>
+        <p class="tool-desc">Diagnose your entire motion across all five parts. Email gate on Pillar 4 and beyond.</p>
+        <span class="tool-link">Open Tool →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">About</div>
+      <h2 class="section-headline">Built by Someone Who Has Run This Motion, Not Just Advised on It.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="section-body">I'm Wilberforce Moyo — Will. I've spent 18 years inside B2B SaaS sales development across the US, UK, and South Africa. I've built SDR teams, rebuilt broken ones, and diagnosed more variance than I can count.</p>
+        <p class="section-body">The SDR Operating System is the framework I wish I'd had on day one. It's not a methodology. It's not a training programme. It's an operating model — built to install, run, and stay active after I leave.</p>
+        <div class="about-creds">
+          <div class="cred-item"><span class="cred-dot"></span><p>18 Years SDR Operations — US, UK, South Africa</p></div>
+          <div class="cred-item"><span class="cred-dot"></span><p>ABM Certified — Demandbase</p></div>
+          <div class="cred-item"><span class="cred-dot"></span><p>HubSpot Configured Delivery</p></div>
+          <div class="cred-item"><span class="cred-dot"></span><p>SalesTech · PropTech · FinTech · B2B SaaS</p></div>
+        </div>
+      </div>
+      <div class="about-right reveal">
+        <h3>Let's Talk</h3>
+        <p>If you're an SDR Manager, Head of Sales Development, or VP Sales at an early-stage B2B SaaS company with 3 to 30 SDRs — this system was built for your team.</p>
+        <p>Send me a message on LinkedIn and I'll respond with next steps.</p>
+        <div class="dm-trigger">
+          Send <strong>AUDIT</strong> if you have an existing team and want it diagnosed.<br><br>
+          Send <strong>INSTALL</strong> if you're building from scratch.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK ── -->
+<section id="book">
+  <div class="book-inner">
+    <div class="reveal">
+      <span class="book-badge">Coming Soon</span>
+      <h2 class="book-title">The SDR Operating System: Reducing Variance. Increasing Predictability.</h2>
+      <p class="book-sub">The book is being written live on LinkedIn — every week's posts map to a chapter. Follow along as the framework is documented in real time, or join the list to be notified when it launches.</p>
+      <a href="https://www.linkedin.com/in/wilberforcemoyo" class="btn-primary">Follow the Build on LinkedIn →</a>
+    </div>
+    <div class="book-visual reveal">
+      <div class="book-visual-title">The SDR Operating System</div>
+      <div class="book-visual-sub">Chapter Map</div>
+      <div class="book-chapters">
+        <div class="chapter-item"><span class="chapter-num">01</span>The Targeting Engine — Foundation</div>
+        <div class="chapter-item"><span class="chapter-num">02</span>The Gatekeeper — Input Control</div>
+        <div class="chapter-item"><span class="chapter-num">03</span>The Consistency Layer — Execution</div>
+        <div class="chapter-item"><span class="chapter-num">04</span>The Diagnostic Cadence — Rhythm</div>
+        <div class="chapter-item"><span class="chapter-num">05</span>The Signal Tower — Signals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER CTA ── -->
+<section id="footer-cta">
+  <div class="section-inner reveal">
+    <div class="section-eyebrow" style="justify-content:center;">Ready to Start</div>
+    <h2 class="section-headline">Stop Managing Variance. Start Eliminating It.</h2>
+    <p class="section-body">Book a free 30-minute call. We'll map your current motion against the five-part system and identify exactly where variance is costing you pipeline.</p>
+    <div class="cta-group">
+      <a href="https://www.linkedin.com/in/wilberforcemoyo" class="btn-primary">Book a Free Discovery Call →</a>
+      <a href="https://wilberforcemoyo.github.io/sdr-tools/audit.html" class="btn-outline">Start With the Free Audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand">The SDR Operating System</div>
+    <div class="footer-tagline">Reducing Variance. Increasing Predictability.</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#system">The System</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="https://wilberforcemoyo.github.io/sdr-tools/">Free Tools</a></li>
+    <li><a href="https://www.linkedin.com/in/wilberforcemoyo">LinkedIn</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Wilberforce Moyo · The SDR Operating System · All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile nav
+  function toggleNav() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '68px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = '#0F1F3D';
+      links.style.padding = '24px';
+      links.style.gap = '20px';
+      links.style.borderTop = '1px solid rgba(255,255,255,0.08)';
+    }
+  }
+
+  // Close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>
