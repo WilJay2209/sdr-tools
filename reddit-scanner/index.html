@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reddit Scanner</title>
+</head>
+<body style="background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%); margin: 0; padding: 20px; font-family: Arial, sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="color: #4ECDC4; font-size: 32px; font-weight: bold; margin: 0 0 20px 0;">Reddit Scanner</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div>
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                    <h2 style="color: white; font-size: 18px; margin: 0 0 15px 0;">Paste Reddit Post</h2>
+                    <textarea id="postInput" placeholder="Paste Reddit post title + body here..." style="width: 100%; height: 150px; padding: 10px; background: rgba(255,255,255,0.05); border: 2px solid #4ECDC4; border-radius: 8px; color: white; font-family: monospace; box-sizing: border-box; margin-bottom: 10px; font-size: 13px;"></textarea>
+                    <button onclick="analyzePost()" style="width: 100%; background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%); color: #1a1a1a; font-weight: bold; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Analyze Post</button>
+                </div>
 
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                    <h3 style="color: #4ECDC4; font-size: 16px; margin: 0 0 12px 0;">Search Keywords by Pillar</h3>
+                    <div style="font-size: 13px; color: #a0c0d0; line-height: 1.8;">
+                        <strong style="color: #FF6B6B;">Pillar 1 (Foundation):</strong> ICP, target account, ABM, sourcing, onboarding<br>
+                        <strong style="color: #4ECDC4;">Pillar 2 (Input Control):</strong> cold calling, spam filters, low response, not picking up<br>
+                        <strong style="color: #FFD93D;">Pillar 3 (Execution):</strong> sequence, CRM, qualification, follow up<br>
+                        <strong style="color: #9D4EDD;">Pillar 4 (Rhythm):</strong> SDR metrics, how to measure, KPI, ramp time<br>
+                        <strong style="color: #3A86FF;">Pillar 5 (Signals):</strong> lead quality, handoff, meeting booking, conversion
+                    </div>
+                </div>
+            </div>
+            
+            <div id="results">
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px; text-align: center; color: #a0a0b0;">
+                    <p>Paste a post & click Analyze</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pillarData = {
+            1: { name: 'Foundation', color: '#FF6B6B', desc: 'ICP Definition, Account Sourcing, Tech Stack, Rep Onboarding' },
+            2: { name: 'Input Control', color: '#4ECDC4', desc: 'Filter 2 & 3 - Problem Likelihood & Role Accessibility' },
+            3: { name: 'Execution Standard', color: '#FFD93D', desc: 'Sequence, Qualification, CRM, Consistency' },
+            4: { name: 'Operating Rhythm', color: '#9D4EDD', desc: 'Five-Day Diagnostic Cadence' },
+            5: { name: 'Signal Management', color: '#3A86FF', desc: 'Re-Entry, Abandonment, Composition, MTG Rate' }
+        };
+
+        const keywords = {
+            1: ['icp', 'target account', 'abm', 'sourcing', 'prospect', 'where to find', 'hiring'],
+            2: ['cold call', 'spam', 'pickup', 'response', 'outreach', 'linkedin', 'email'],
+            3: ['sequence', 'crm', 'qualification', 'follow', 'discipline', 'process'],
+            4: ['metric', 'measure', 'kpi', 'ramp', 'performance', 'productivity'],
+            5: ['lead quality', 'handoff', 'meeting', 'conversion', 'pipeline', 'ae']
+        };
+
+        function analyzePost() {
+            const postContent = document.getElementById('postInput').value.trim().toLowerCase();
+            if (!postContent) {
+                alert('Paste a Reddit post first');
+                return;
+            }
+
+            let scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+            
+            for (let pillar = 1; pillar <= 5; pillar++) {
+                keywords[pillar].forEach(keyword => {
+                    if (postContent.includes(keyword)) {
+                        scores[pillar] += 10;
+                    }
+                });
+            }
+
+            let primaryPillar = 1;
+            let maxScore = 0;
+            for (let p = 1; p <= 5; p++) {
+                if (scores[p] > maxScore) {
+                    maxScore = scores[p];
+                    primaryPillar = p;
+                }
+            }
+
+            let confidence = Math.min(100, 60 + maxScore);
+            let coreProblem = generateProblem(primaryPillar, postContent);
+            let positioning = generatePositioning(primaryPillar);
+
+            const pillar = pillarData[primaryPillar];
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div style="background: rgba(42, 42, 62, 0.6); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                    <h3 style="color: #4ECDC4; font-weight: bold; margin: 0 0 15px 0;">Analysis Result</h3>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Primary Pillar</div>
+                        <div style="color: ${pillar.color}; font-weight: bold; font-size: 18px;">${pillar.name}</div>
+                        <div style="color: #70808c; font-size: 12px; margin-top: 3px;">${pillar.desc}</div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Confidence Match</div>
+                        <div style="color: #4ECDC4; font-weight: bold; font-size: 24px;">${confidence}%</div>
+                    </div>
+
+                    <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #3a3a4e;">
+                        <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;">Core Problem</div>
+                        <p style="color: white; margin: 0; font-size: 14px; line-height: 1.5;">${coreProblem}</p>
+                    </div>
+
+                    <div>
+                        <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;">Suggested Positioning</div>
+                        <p style="color: #d0d0e0; background: rgba(255,255,255,0.05); padding: 12px; border-left: 3px solid ${pillar.color}; border-radius: 4px; margin: 0 0 10px 0; font-size: 13px; line-height: 1.6; font-style: italic;">"${positioning}"</p>
+                        <button onclick="copyText(\`${positioning}\`); return false;" style="width: 100%; background: ${pillar.color}; color: #1a1a1a; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px;">Copy Positioning</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateProblem(pillar, content) {
+            const problems = {
+                1: 'Team lacks clear ICP definition and systematic prospect sourcing approach.',
+                2: 'Outreach is reaching wrong people or getting blocked by accessibility filters.',
+                3: 'No standardized execution process causing inconsistent results across team.',
+                4: 'Unable to measure SDR performance with consistent, predictable metrics.',
+                5: 'Lead quality issues or poor SDR-to-AE handoff and feedback loop.'
+            };
+            return problems[pillar];
+        }
+
+        function generatePositioning(pillar) {
+            const positionings = {
+                1: 'Better ICP clarity and structured account sourcing prevent wasted prospecting time. The Foundation pillar ensures your SDRs are calling the right people from day one.',
+                2: 'Multi-touch sequences (email + LinkedIn + call) with better targeting filters increase accessibility and response rates. Input Control eliminates low-probability prospects before they waste time.',
+                3: 'Inconsistent execution kills productivity. Standardized sequences, qualification rules, and CRM discipline reduce variance and make results repeatable across the team.',
+                4: 'Activity metrics are vanity. Measuring Re-Entry Rate, Abandonment Rate, and Composition Score shows what actually works. Operating Rhythm makes measurement systematic.',
+                5: 'Poor lead quality tanks close rates. Signal Management tracks what SDRs are actually sending to AEs, creating feedback loops that improve qualification over time.'
+            };
+            return positionings[pillar];
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Positioning copied! Paste on Reddit or LinkedIn.');
+            }).catch(() => {
+                alert('Copy failed on your device. Select text manually.');
+            });
+        }
+    </script>
+</body>
+</html>
