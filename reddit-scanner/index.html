@@ -83,7 +83,7 @@
             document.getElementById('linkedinText').textContent = 'Generating unique perspective...';
             document.getElementById('linkedinSection').style.display = 'block';
 
-            fetch('/api/generate-linkedin-post', {
+            fetch('https://sdr-tools-eight.vercel.app/api/generate-linkedin-post', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
