@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reddit Scanner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%); margin: 0; padding: 20px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="color: #4ECDC4; font-size: 32px; font-weight: bold; margin: 0 0 20px 0;">Reddit Scanner</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div>
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                    <h2 style="color: white; font-size: 18px; margin: 0 0 15px 0;">Paste Reddit Post</h2>
+                    <textarea id="postInput" placeholder="Paste Reddit post here..." style="width: 100%; height: 150px; padding: 10px; background: rgba(255,255,255,0.05); border: 2px solid #4ECDC4; border-radius: 8px; color: white; font-family: monospace; box-sizing: border-box; margin-bottom: 10px;"></textarea>
+                    <button onclick="analyzePost()" style="width: 100%; background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%); color: #1a1a1a; font-weight: bold; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Analyze Post</button>
+                </div>
+            </div>
+            
+            <div id="results">
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px; text-align: center; color: #a0a0b0;">
+                    <p>Paste a post</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function analyzePost() {
+            const postContent = document.getElementById('postInput').value.trim();
+            if (!postContent) return alert('Paste a post first');
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div style="background: rgba(42, 42, 62, 0.6); padding: 20px; border-radius: 8px; color: #4ECDC4;">Analyzing...</div>';
+
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        messages: [{
+                            role: 'user',
+                            content: `Analyze this Reddit post against SDR Operating System.
+
+Pillars:
+1. Foundation - ICP, Sourcing, Tech Stack, Onboarding
+2. Input Control - Filters & Accessibility
+3. Execution Standard - Sequence, Qualification, CRM
+4. Operating Rhythm - 5-day cadence
+5. Signal Management - Metrics & Rates
+
+Post: "${postContent}"
+
+JSON ONLY:
+{
+  "primaryPillar": <1-5>,
+  "confidence": <0-100>,
+  "coreProblem": "<sentence>",
+  "positioning": "<3 sentences>"
+}`
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                const analysis = JSON.parse(data.content[0].text);
+                const pillarNames = ['', 'Foundation', 'Input Control', 'Execution Standard', 'Operating Rhythm', 'Signal Management'];
+
+                resultsDiv.innerHTML = `
+                    <div style="background: rgba(42, 42, 62, 0.6); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                        <h3 style="color: #4ECDC4; font-weight: bold; margin: 0 0 15px 0;">Result</h3>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #70808c; font-size: 12px; margin-bottom: 5px;">PILLAR</div>
+                            <div style="color: #4ECDC4; font-weight: bold; font-size: 16px;">${pillarNames[analysis.primaryPillar]}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #70808c; font-size: 12px; margin-bottom: 5px;">CONFIDENCE</div>
+                            <div style="color: #4ECDC4; font-weight: bold; font-size: 20px;">${analysis.confidence}%</div>
+                        </div>
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #3a3a4e;">
+                            <div style="color: #70808c; font-size: 12px; margin-bottom: 5px;">PROBLEM</div>
+                            <p style="color: white; margin: 0; font-size: 14px;">${analysis.coreProblem}</p>
+                        </div>
+                        <div>
+                            <div style="color: #70808c; font-size: 12px; margin-bottom: 8px;">POSITIONING</div>
+                            <p style="color: #d0d0e0; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border-left: 2px solid #4ECDC4; margin: 0 0 10px 0; font-size: 13px; line-height: 1.5;">"${analysis.positioning}"</p>
+                            <button onclick="copyText('${analysis.positioning.replace(/'/g, "\\'")}'); return false;" style="width: 100%; background: #4ECDC4; color: #1a1a1a; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer;">Copy Positioning</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div style="background: #FF6B6B; color: white; padding: 15px; border-radius: 8px;">Error: Check that you have internet connection</div>`;
+                console.error(error);
+            }
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied!');
+            });
+        }
+    </script>
+</body>
+  </html>
