@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reddit Scanner</title>
+</head>
+<body style="background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%); margin: 0; padding: 20px; font-family: Arial, sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="color: #4ECDC4; font-size: 32px; font-weight: bold; margin: 0 0 20px 0;">Reddit Scanner</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div>
+                <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                    <h2 style="color: white; font-size: 18px; margin: 0 0 15px 0;">Paste Reddit Post</h2>
+                    <textarea id="postInput" placeholder="Paste Reddit post here..." style="width: 100%; height: 150px; padding: 10px; background: rgba(255,255,255,0.05); border: 2px solid #4ECDC4; border-radius: 8px; color: white; font-family: monospace; box-sizing: border-box; margin-bottom: 10px; font-size: 13px;"></textarea>
+                    <button onclick="analyzePost()" style="width: 100%; background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%); color: #1a1a1a; font-weight: bold; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Analyze Post</button>
+                </div>
+            </div>
+            
+            <div id="results" style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px; text-align: center; color: #a0a0b0;">
+                <p>Paste a post & click Analyze</p>
+            </div>
+        </div>
+
+        <div id="linkedinSection" style="margin-top: 30px; display: none;">
+            <h2 style="color: #4ECDC4; font-size: 24px; font-weight: bold; margin: 0 0 20px 0;">LinkedIn Post Ready</h2>
+            <div style="background: rgba(42, 42, 62, 0.4); border: 1px solid #3a3a4e; border-radius: 8px; padding: 20px;">
+                <div id="linkedinText" style="background: rgba(255,255,255,0.02); border-left: 4px solid #4ECDC4; padding: 20px; border-radius: 8px; margin-bottom: 15px; color: #d0d0e0; line-height: 1.8; font-size: 14px; white-space: pre-wrap; word-wrap: break-word;"></div>
+                <button onclick="copyLinkedIn()" style="width: 100%; background: linear-gradient(135deg, #4ECDC4 0%, #3A86FF 100%); color: #1a1a1a; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px;">Copy LinkedIn Post</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let linkedinPost = '';
+
+        function analyzePost() {
+            const postContent = document.getElementById('postInput').value.trim();
+            if (!postContent) {
+                alert('Paste a post first');
+                return;
+            }
+
+            const lowerContent = postContent.toLowerCase();
+            let pillar = 1;
+
+            if (lowerContent.includes('cold call') || lowerContent.includes('spam') || lowerContent.includes('pickup')) {
+                pillar = 2;
+            } else if (lowerContent.includes('sequence') || lowerContent.includes('crm') || lowerContent.includes('qualification')) {
+                pillar = 3;
+            } else if (lowerContent.includes('metric') || lowerContent.includes('measure') || lowerContent.includes('kpi')) {
+                pillar = 4;
+            } else if (lowerContent.includes('quality') || lowerContent.includes('handoff') || lowerContent.includes('meeting')) {
+                pillar = 5;
+            } else if (lowerContent.includes('icp') || lowerContent.includes('sourcing') || lowerContent.includes('prospect')) {
+                pillar = 1;
+            }
+
+            const pillarNames = ['', 'Foundation', 'Input Control', 'Execution Standard', 'Operating Rhythm', 'Signal Management'];
+            const pillarColors = ['', '#FF6B6B', '#4ECDC4', '#FFD93D', '#9D4EDD', '#3A86FF'];
+            const pillarDescs = [
+                '',
+                'ICP Definition, Account Sourcing, Tech Stack, Rep Onboarding',
+                'Filter 2 & 3 - Problem Likelihood & Role Accessibility',
+                'Sequence, Qualification, CRM, Consistency',
+                'Five-Day Diagnostic Cadence',
+                'Re-Entry, Abandonment, Composition, MTG Rate'
+            ];
+
+            const problems = [
+                '',
+                'Team lacks clear ICP definition and systematic prospect sourcing.',
+                'Outreach reaching wrong people or getting blocked by filters.',
+                'No standardized execution process causing inconsistent results.',
+                'Unable to measure SDR performance with consistent metrics.',
+                'Lead quality issues or poor SDR-to-AE handoff and feedback.'
+            ];
+
+            generateLinkedInPost(pillar, postContent);
+            displayResults(pillar, pillarNames[pillar], pillarDescs[pillar], pillarColors[pillar], problems[pillar]);
+        }
+
+        function generateLinkedInPost(pillar, postContent) {
+            const pillarNames = ['', 'Foundation', 'Input Control', 'Execution Standard', 'Operating Rhythm', 'Signal Management'];
+            const pillarDescriptions = [
+                '',
+                'ICP Definition, Account Sourcing, Tech Stack, Rep Onboarding',
+                'Filter 2 & 3 - Problem Likelihood & Role Accessibility',
+                'Sequence, Qualification, CRM, Consistency',
+                'Five-Day Diagnostic Cadence',
+                'Re-Entry, Abandonment, Composition, MTG Rate'
+            ];
+
+            const prompt = `You are Wilberforce Moyo, an SDR Operations consultant with 18 years of B2B SaaS experience. You've built the SDR Operating System with 5 pillars.
+
+This Reddit post was just shared:
+"${postContent}"
+
+This post relates to Pillar ${pillar}: ${pillarNames[pillar]} (${pillarDescriptions[pillar]})
+
+Generate a compelling, original LinkedIn post that:
+1. Opens with "Here's what I'm seeing on Reddit..." (authentic voice)
+2. Identifies the SPECIFIC problem from this Reddit post (not generic)
+3. Explains how Pillar ${pillar} (${pillarNames[pillar]}) solves it
+4. Includes a concrete example or statistic relevant to THIS problem
+5. Contrarian angle: explains why teams fail at this
+6. Ends with: "DM me AUDIT if you want to [specific outcome related to this problem]."
+
+Make it personal, data-driven, and based on what was actually said in the Reddit post. Not a template. Write in first person. Make it feel like you just read this post and have insights to share.
+
+Output ONLY the LinkedIn post text. No markdown, no formatting. Just the post.`;
+
+            document.getElementById('linkedinText').textContent = 'Generating unique perspective...';
+            document.getElementById('linkedinSection').style.display = 'block';
+
+            fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 1500,
+                    messages: [{
+                        role: 'user',
+                        content: prompt
+                    }]
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content && data.content[0] && data.content[0].text) {
+                    linkedinPost = data.content[0].text;
+                    document.getElementById('linkedinText').textContent = linkedinPost;
+                } else {
+                    document.getElementById('linkedinText').textContent = 'Error generating post. Try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('linkedinText').textContent = 'Error generating post. Check your internet connection.';
+            });
+        }
+
+        function displayResults(pillar, name, desc, color, problem) {
+            const html = `
+                <div style="margin-bottom: 15px;">
+                    <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px;">Primary Pillar</div>
+                    <div style="color: ${color}; font-weight: bold; font-size: 18px;">${name}</div>
+                    <div style="color: #70808c; font-size: 12px; margin-top: 3px;">${desc}</div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px;">Confidence</div>
+                    <div style="color: #4ECDC4; font-weight: bold; font-size: 24px;">85%</div>
+                </div>
+
+                <div style="padding-top: 15px; border-top: 1px solid #3a3a4e;">
+                    <div style="color: #70808c; font-size: 11px; text-transform: uppercase; margin-bottom: 5px;">Core Problem</div>
+                    <p style="color: white; margin: 0; font-size: 14px; line-height: 1.5;">${problem}</p>
+                </div>
+            `;
+            
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function copyLinkedIn() {
+            if (linkedinPost) {
+                navigator.clipboard.writeText(linkedinPost);
+                alert('LinkedIn post copied!');
+            }
+        }
+    </script>
+</body>
+</html>
