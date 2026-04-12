@@ -231,6 +231,10 @@
 
     <textarea class="llm-textarea" id="llm-input" placeholder="Paste a LinkedIn post, hiring description, or company update about this account...&#10;&#10;Example: 'We just hired our 5th SDR and pipeline is still inconsistent. Looking for RevOps help...'"></textarea>
 
+    <div style="background: #FEF3C7; border: 1px solid #FEF3C7; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; font-size: 13px; color: #92400E; line-height: 1.5;">
+      <strong>No API key yet?</strong> Get one free from <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color: #92400E; font-weight: 600;">Anthropic</a>. Takes 2 minutes. <a href="https://docs.anthropic.com/en/docs/about-claude/models/models-overview" target="_blank" style="color: #92400E; text-decoration: underline;">Learn more →</a>
+    </div>
+
     <div class="llm-row">
       <input class="llm-api-input" type="password" id="llm-api-key" placeholder="Anthropic API key (sk-ant-...)" autocomplete="off">
       <button class="llm-btn" id="llm-btn" onclick="scoreProblemLikelihood()">Score with AI</button>
@@ -337,16 +341,16 @@
   </div>
 
   <div class="actions">
-    <button class="btn" onclick="resetAll()">Reset account</button>
+    <button class="btn" onclick="if(confirm('⚠️ Clear all responses? This cannot be undone.')) { resetAll(); }">Reset account</button>
     <button class="btn btn-primary" onclick="window.open('https://wilberforcemoyo.github.io/sdr-tools/','_blank')">Signal dashboard</button>
   </div>
 
   <div class="cta">
-    <div class="cta-tag">SDR OPERATIONS AUDIT · $4,500 – $12,000</div>
+    <div class="cta-tag">NEXT STEP · BOOK A CALL</div>
     <div class="cta-title">Is The Gatekeeper holding across your whole team?</div>
-    <div class="cta-desc">The SDR Operations Audit diagnoses all four pillars at the system level — not just one account. Find out exactly which pillar is causing pipeline unpredictability.</div>
-    <a href="https://sdroperatingsystem.netlify.app" target="_blank" class="cta-btn">Book the SDR OS Audit →</a>
-      <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="cta-li" style="display:inline-block;margin-top:10px;color:var(--gold);font-size:14px">Connect on LinkedIn →</a>
+    <div class="cta-desc">The SDR Operations Audit diagnoses all four pillars at the system level — not just one account. Book a 20-minute diagnostic call to understand exactly which pillar is causing pipeline unpredictability.</div>
+    <a href="https://calendly.com/sdroperatingsystem/30min" target="_blank" class="cta-btn">Schedule 20-Min Call →</a>
+      <a href="https://linkedin.com/in/wilberforce-moyo-236543256" target="_blank" class="cta-li" style="display:inline-block;margin-top:10px;color:var(--gold);font-size:14px">Or connect on LinkedIn →</a>
   </div>
 
 </div>
